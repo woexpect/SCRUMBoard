@@ -17,6 +17,9 @@ public class User {
     String mail;
     int id;
     
+    public User(){
+    }
+    
     public User(String name, String pwd, String uname, String mail, int id){
         this.name = name;
         this.pwd = pwd;

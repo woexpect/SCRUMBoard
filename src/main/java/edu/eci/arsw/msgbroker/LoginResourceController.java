@@ -43,22 +43,24 @@ public class LoginResourceController {
     @Autowired
     InMemoryPersistence imp;
     
-    @RequestMapping(path = "/user/{id}",method = RequestMethod.GET)
-    public ResponseEntity<?> test(@PathVariable Integer id){
+    @RequestMapping(path = "/user/{mail}",method = RequestMethod.GET)
+    public ResponseEntity<?> test(@PathVariable String mail){
         try{
-            System.out.println("ENTRA GET");
-            return new ResponseEntity<>(imp.getUser(id), HttpStatus.CREATED);
+            System.out.println("ENTRA GET --> " + mail);
+            return new ResponseEntity<>(imp.getUser(mail + ".com"), HttpStatus.CREATED);
         }catch(Exception e){
             return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
         }
     }
     
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> doLogin(@RequestBody User user){
         try{
-            System.out.println("ENTRA POST");
-            return new ResponseEntity<>("Orden agregada satisfactoriamente.",HttpStatus.CREATED);
+            System.out.println("ENTRA POST --> " + user);
+            User res = imp.login(user.getMail(), user.getPwd());
+            System.out.println("RES: " + res);
+            return new ResponseEntity<>(res,HttpStatus.CREATED);                
         }catch(Exception e){
             return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
         }

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class InMemoryPersistence{
     
-    private final ConcurrentHashMap<Integer, User> users;
+    private final ConcurrentHashMap<String, User> users;
     
     public InMemoryPersistence(){
         users = new ConcurrentHashMap<>();
@@ -34,13 +34,26 @@ public class InMemoryPersistence{
         User a = new User("johan penia", "asd123", "woexpect", "sebasp95@hotmail.com", 100000);
         User b = new User("georgios ikosidekas", "qwe123", "giko", "gikosidekas@hotmail.com", 100001);
         User c = new User("alejandro ramirez", "12345", "amirez", "alejormrz@hotmail.com", 100002);
-        users.put(a.getId(), a);
-        users.put(b.getId(), b);
-        users.put(c.getId(), c);
+        users.put(a.getMail(), a);
+        users.put(b.getMail(), b);
+        users.put(c.getMail(), c);
     }
     
-    public User getUser(int id){
-        return users.get(id);
+    public User getUser(String mail){
+        return users.get(mail);
+    }
+
+    public User login(String mail, String pwd) {
+        User res = null;
+        res = users.get(mail);
+        if(res != null){
+            if(res.getPwd().equals(pwd)){
+                return res;
+            }else{
+                return null;
+            }
+        }
+        return null;
     }
     
 }

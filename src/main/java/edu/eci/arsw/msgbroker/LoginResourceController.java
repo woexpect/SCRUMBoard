@@ -16,16 +16,20 @@
  */
 package edu.eci.arsw.msgbroker;
 
+import edu.eci.arsw.msgbroker.model.User;
+import edu.eci.arsw.msgbroker.services.InMemoryPersistence;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -36,19 +40,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class LoginResourceController {
     
-    @RequestMapping(method = RequestMethod.GET)
-    public String test(){
-        return "Ok";
+    @Autowired
+    InMemoryPersistence imp;
+    
+    @RequestMapping(path = "/user/{id}",method = RequestMethod.GET)
+    public ResponseEntity<?> test(@PathVariable Integer id){
+        try{
+            System.out.println("ENTRA GET");
+            return new ResponseEntity<>(imp.getUser(id), HttpStatus.CREATED);
+        }catch(Exception e){
+            return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
+        }
     }
     
-//    @RequestMapping(path = "/hiddenwords/{gameid}", method = RequestMethod.GET)
-//    public ResponseEntity<?> getCurrentWord(@PathVariable Integer gameid){
-//        try {    
-//            return new ResponseEntity<>(gameServices.getCurrentGuessedWord(gameid),HttpStatus.ACCEPTED);
-//        } catch (GameNotFoundException ex) {
-//            return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
-//        }
-//    }
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> doLogin(@RequestBody User user){
+        try{
+            System.out.println("ENTRA POST");
+            return new ResponseEntity<>("Orden agregada satisfactoriamente.",HttpStatus.CREATED);
+        }catch(Exception e){
+            return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
+        }
+    }
+    
+    @RequestMapping(path = "/users", method = RequestMethod.GET)
+    public ResponseEntity<?> getCurrentWord(){
+        try {    
+            return new ResponseEntity<>("",HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
     
 
     

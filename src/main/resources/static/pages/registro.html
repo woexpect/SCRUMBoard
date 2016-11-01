@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="../styles/registro.css">
 		<link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
 		<link rel="icon" href="../resources/favicon.png">
-		<script type="text/javascript" src="../scripts/main.js"></script>
+		<script type="text/javascript" src="../scripts/registro.js"></script>
     </head>
 
     <body>
@@ -27,13 +27,13 @@
 				<div class="registro">
 					<p class="title">Registra tu nueva cuenta</p>
 					<form>
-						<input type="text" name="usuario" placeholder=" Nombre de usuario">
-						<input type="text" name="nombres" placeholder=" Nombres">
-						<input type="text" name="apellidos" placeholder=" Apellidos">
-						<input type="email" name="correo" placeholder=" Correo Electrónico">
-						<input type="password" name="passw" placeholder=" Contraseña" class="pw">
-						<input type="password" name="passwcorrecto" placeholder=" Reingrese su contraseña" class="pw">
-						<button class="signup">Resgistrar su cuenta</button>
+						<input type="text" id="user" name="usuario" placeholder=" Nombre de usuario">
+						<input type="text" id="nombre" name="nombres" placeholder=" Nombres">
+						<input type="text" id="apellido" name="apellidos" placeholder=" Apellidos">
+						<input type="email" id="email" name="correo" placeholder=" Correo Electrónico">
+						<input type="password" id="pass1" name="passw" placeholder=" Contraseña" class="pw">
+						<input type="password" id="pass2" name="passwcorrecto" placeholder=" Reingrese su contraseña" class="pw">
+						<button onclick="registro()" class="signup">Resgistrar su cuenta</button>
 					</form>
 					<br>
 					<hr width="90%">

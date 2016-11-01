@@ -9,8 +9,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 /**
- *
- * @author johan
+ * Persistencia en memoria de la aplicación, contiene usuarios, boards y demás
+ * elementos necesarios para la ejecución de la aplicación.
+ * @author johan peña
  */
 @Service
 public class InMemoryPersistence{
@@ -31,9 +32,9 @@ public class InMemoryPersistence{
     }
 
     private void preloadUsers() {
-        User a = new User("johan penia", "asd123", "woexpect", "sebasp95@hotmail.com", 100000);
-        User b = new User("georgios ikosidekas", "qwe123", "giko", "gikosidekas@hotmail.com", 100001);
-        User c = new User("alejandro ramirez", "12345", "amirez", "alejormrz@hotmail.com", 100002);
+        User a = new User("johan penia", "asd123", "woexpect", "sebasp95@hotmail.com");
+        User b = new User("georgios ikosidekas", "qwe123", "giko", "gikosidekas@hotmail.com");
+        User c = new User("alejandro ramirez", "12345", "amirez", "alejormrz@hotmail.com");
         users.put(a.getMail(), a);
         users.put(b.getMail(), b);
         users.put(c.getMail(), c);
@@ -54,6 +55,19 @@ public class InMemoryPersistence{
             }
         }
         return null;
+    }
+
+    public String register(User user) {
+        String res = "";
+        User u = null;
+        u = users.get(user.getMail());
+        if(u != null){
+            res = "El usuario con el correo descrito ya existe.";
+        }else{
+            users.put(user.getMail(), user);
+            res = "Has sido agregado a la plataforma satisfactoriamente.";
+        }
+        return res;
     }
     
 }

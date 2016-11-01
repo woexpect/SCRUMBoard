@@ -8,8 +8,7 @@ function login(){
            name: "",
            pwd: p,
            uname: "",
-           mail: c,
-           id: 0
+           mail: c
         }),
         contentType: "application/json",
         dataType: 'json',

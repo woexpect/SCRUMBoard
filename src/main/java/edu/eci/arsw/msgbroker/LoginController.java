@@ -1,26 +1,7 @@
-/*
- * Copyright (C) 2016 Pivotal Software, Inc.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package edu.eci.arsw.msgbroker;
 
 import edu.eci.arsw.msgbroker.model.User;
 import edu.eci.arsw.msgbroker.services.InMemoryPersistence;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,16 +14,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
- * @author hcadavid
+ * Este controlador se encarga de recibir las peticiones referentes al logeo de la aplicacion.
+ * @author johan peña
  */
 @RestController
 @RequestMapping("/login")
-public class LoginResourceController {
+public class LoginController {
     
     @Autowired
     InMemoryPersistence imp;
-    
+
     @RequestMapping(path = "/user/{mail}",method = RequestMethod.GET)
     public ResponseEntity<?> test(@PathVariable String mail){
         try{
@@ -53,6 +34,12 @@ public class LoginResourceController {
         }
     }
     
+    /**
+     * Se recibe mediante POST el correo y contraseña que el usuario a ingresado
+     * en el cliente para hacer login.
+     * @param user Se crea instancia de objeto User para recibir correo y contraseña.
+     * @return ResponseEntity con User si autenticación OK o null de lo contrario
+     */
     @RequestMapping(path = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> doLogin(@RequestBody User user){
@@ -65,18 +52,4 @@ public class LoginResourceController {
             return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
         }
     }
-    
-    @RequestMapping(path = "/users", method = RequestMethod.GET)
-    public ResponseEntity<?> getCurrentWord(){
-        try {    
-            return new ResponseEntity<>("",HttpStatus.ACCEPTED);
-        } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
-        }
-    }
-    
-
-    
-    
-    
 }

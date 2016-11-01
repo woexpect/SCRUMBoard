@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author johan
+ * @author johan peña
  */
 public class SCRUMBoardService {
     

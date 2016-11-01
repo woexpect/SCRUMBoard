@@ -6,8 +6,8 @@
 package edu.eci.arsw.msgbroker.model;
 
 /**
- *
- * @author johan
+ * Clase de tipo User para el manejo de usuarios dentro de la aplicación.
+ * @author johan peña
  */
 public class User {
     
@@ -15,25 +15,25 @@ public class User {
     String pwd;
     String uname;
     String mail;
-    int id;
     
+    /**
+     * Constructor por defecto
+     */
     public User(){
     }
     
-    public User(String name, String pwd, String uname, String mail, int id){
+    /**
+     * Constructor de User por parametros
+     * @param name      nombre del usuario
+     * @param pwd       contrasena del usuario
+     * @param uname     username del usuario
+     * @param mail      correo del usuario
+     */
+    public User(String name, String pwd, String uname, String mail){
         this.name = name;
         this.pwd = pwd;
         this.uname = uname;
         this.mail = mail;
-        this.id = id;
-    }
-    
-    public int getId(){
-        return id;
-    }
-    
-    public void setId(int id){
-        this.id = id;
     }
     
     public String getMail(){
@@ -70,7 +70,7 @@ public class User {
     
     @Override
     public String toString() {
-        return "User{" + "name=" + name + "pwd=" + pwd + "uname=" + uname + "mail=" + mail + "id=" + id +"}";
+        return "User{" + "name=" + name + "pwd=" + pwd + "uname=" + uname + "mail=" + mail + "}";
     }
     
 }

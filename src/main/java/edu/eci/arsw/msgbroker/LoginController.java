@@ -1,6 +1,6 @@
 package edu.eci.arsw.msgbroker;
 
-import edu.eci.arsw.msgbroker.model.User;
+import edu.eci.arsw.msgbroker.model.interfaces.User;
 import edu.eci.arsw.msgbroker.services.InMemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

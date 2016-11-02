@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package edu.eci.arsw.msgbroker.services;
-import edu.eci.arsw.msgbroker.model.User;
+import edu.eci.arsw.msgbroker.model.interfaces.User;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 

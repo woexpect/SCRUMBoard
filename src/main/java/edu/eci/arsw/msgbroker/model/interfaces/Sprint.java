@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.msgbroker.model;
+package edu.eci.arsw.msgbroker.model.interfaces;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author johan
  */
-public interface LoginInterface {
+public interface Sprint {
     
-    public User login(User user);
-    
+    public void addTask(Task task);
+    public ArrayList<Task> getTasks();
 }

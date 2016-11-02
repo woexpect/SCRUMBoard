@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package edu.eci.arsw.msgbroker.services;
+import edu.eci.arsw.msgbroker.model.interfaces.Backlog;
+import edu.eci.arsw.msgbroker.model.interfaces.Board;
+import edu.eci.arsw.msgbroker.model.interfaces.Sprint;
+import edu.eci.arsw.msgbroker.model.interfaces.Task;
 import edu.eci.arsw.msgbroker.model.interfaces.User;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
@@ -16,7 +20,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class InMemoryPersistence{
     
-    private final ConcurrentHashMap<String, User> users;
+     ConcurrentHashMap<String, User> users;
+     ConcurrentHashMap<String, Board> boards;
+     ConcurrentHashMap<String, Backlog> backlogs;
+     ConcurrentHashMap<String, Sprint> sprints;
+     ConcurrentHashMap<String, Task> tasks;
+    
     
     public InMemoryPersistence(){
         users = new ConcurrentHashMap<>();

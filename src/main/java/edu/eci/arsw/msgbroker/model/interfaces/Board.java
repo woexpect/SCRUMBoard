@@ -16,5 +16,5 @@ public interface Board {
     public void addCollaborator(User user);
     public ArrayList<User> getCollaborators();
     public void addBackLog(Backlog backlog);
-    public ArrayList<Backlog> getBackLogs();
+    public Backlog getBackLogs();
 }

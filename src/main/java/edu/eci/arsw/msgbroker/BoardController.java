@@ -1,5 +1,7 @@
 package edu.eci.arsw.msgbroker;
 
+import edu.eci.arsw.msgbroker.model.StandardBoard;
+import edu.eci.arsw.msgbroker.model.interfaces.Board;
 import edu.eci.arsw.msgbroker.model.interfaces.User;
 import edu.eci.arsw.msgbroker.services.InMemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,7 @@ public class BoardController {
     }
     
     @RequestMapping(path = "/userboard/{mail}",method = RequestMethod.GET)
-    public ResponseEntity<?> buscarBoards(@PathVariable String mail){
+    public ResponseEntity<?> buscarBoardsUsuario(@PathVariable String mail){
         try{
             System.out.println("ENTRA GET --> " + mail);
             return new ResponseEntity<>(imp.getBoardsUser(mail + ".com"), HttpStatus.CREATED);
@@ -46,17 +48,28 @@ public class BoardController {
     }
     
     
-    /*
-    @RequestMapping(path = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> doLogin(@RequestBody User user){
+    public ResponseEntity<?> createBoard(@RequestBody StandardBoard board){
         try{
-            System.out.println("ENTRA POST --> " + user);
-            User res = imp.login(user.getMail(), user.getPwd());
-            System.out.println("RES: " + res);
-            return new ResponseEntity<>(res,HttpStatus.CREATED);                
+            System.out.println("ENTRA POST --> " + board);
+            String creado = imp.crearBoard(board);
+            return new ResponseEntity<>(creado,HttpStatus.CREATED);                
         }catch(Exception e){
             return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
         }
-    }*/
+    }
+    
+    @RequestMapping(path = "/{clave}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> agregarColaborador(@PathVariable String clave, @RequestBody String mail){
+        try{
+            System.out.println("ENTRA POST --> " + mail);
+            String creado = imp.agregarColaborador(mail, clave);
+            return new ResponseEntity<>(creado,HttpStatus.CREATED);                
+        }catch(Exception e){
+            return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
+        }
+    }
+    
 }

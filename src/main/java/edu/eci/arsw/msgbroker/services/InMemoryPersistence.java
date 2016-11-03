@@ -120,6 +120,23 @@ public class InMemoryPersistence{
         boards.get(clave).addCollaborator(mail);
     }
     
+    public String agregarColaborador(String mail, String clave){
+        String res = "";
+        ArrayList a = boards.get(clave).getCollaborators();
+        if(a.contains(mail)){
+            res = "El colaborador descrito ya está agregado en el board.";
+        }else{
+            res = "Colaborador agregado satisfactoriamente.";
+            boards.get(clave).addCollaborator(mail);            
+        }
+        return res;
+    }
+    
+    /**
+     * Busca los boards para el usuario seleccionado
+     * @param mail
+     * @return 
+     */
     public ArrayList<Board> getBoardsUser(String mail){
         ArrayList<String> c = users.get(mail).getClaves();
         ArrayList<Board> res = new ArrayList<>();
@@ -127,6 +144,18 @@ public class InMemoryPersistence{
             if(boards.get(c.get(i)) != null){
                 res.add(boards.get(c.get(i)));
             }
+        }
+        return res;
+    }
+
+    public String crearBoard(Board board) {
+        String res = "";
+        Board b = boards.get(board.getClave());
+        if(b != null){
+            res = "El board con la clave: " + board.getClave() + " ya existe, por favor ingrese otra clave.";
+        }else{
+            res = "Se ha registrado el board correctamente.";
+            boards.put(board.getClave(), board);
         }
         return res;
     }

@@ -13,7 +13,7 @@ function login(){
         contentType: "application/json",
         dataType: 'json',
         success: function(data) {
-            window.location = "http://localhost:8080/pages/registro.html";
+            window.location = "http://localhost:8080/pages/dashboard.html";
             sessionData(data);
             alert("Bienvenido: " + data.name);
         },

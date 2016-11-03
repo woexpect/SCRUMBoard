@@ -1,5 +1,5 @@
 function login(){
-    var c = $("#correo").val();
+    var c = $("#email").val();
     var p = $("#pass").val();
     $.ajax({
         type: "POST",

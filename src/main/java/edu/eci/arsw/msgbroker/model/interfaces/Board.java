@@ -13,8 +13,9 @@ import java.util.ArrayList;
  */
 public interface Board {
     
-    public void addCollaborator(User user);
-    public ArrayList<User> getCollaborators();
+    public void addCollaborator(String mail);
+    public ArrayList<String> getCollaborators();
     public void addBackLog(Backlog backlog);
-    public Backlog getBackLogs();
+    public String getClave();
+    public Backlog getBackLog();
 }

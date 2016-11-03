@@ -5,10 +5,15 @@
  */
 package edu.eci.arsw.msgbroker.model.interfaces;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author johan
  */
 public interface Task {
+    
+    public void addUser(User user);
+    public ArrayList<User> getUsers();
     
 }

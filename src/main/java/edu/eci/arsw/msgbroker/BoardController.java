@@ -18,28 +18,35 @@ import org.springframework.web.bind.annotation.RestController;
  * @author johan peña
  */
 @RestController
-@RequestMapping("/login")
-public class LoginController {
+@RequestMapping("/board")
+public class BoardController {
     
     @Autowired
     InMemoryPersistence imp;
 
-    @RequestMapping(path = "/user/{mail}",method = RequestMethod.GET)
-    public ResponseEntity<?> test(@PathVariable String mail){
+    @RequestMapping(path = "/{clave}",method = RequestMethod.GET)
+    public ResponseEntity<?> test(@PathVariable String clave){
         try{
-            System.out.println("ENTRA GET --> " + mail);
-            return new ResponseEntity<>(imp.getUser(mail + ".com"), HttpStatus.CREATED);
+            System.out.println("ENTRA GET --> " + clave);
+            return new ResponseEntity<>(imp.getBoard(clave), HttpStatus.CREATED);
         }catch(Exception e){
-            return new ResponseEntity<>("Error al cargar Usuario.",HttpStatus.FORBIDDEN);  
+            return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
         }
     }
     
-    /**
-     * Se recibe mediante POST el correo y contraseña que el usuario a ingresado
-     * en el cliente para hacer login.
-     * @param user Se crea instancia de objeto User para recibir correo y contraseña.
-     * @return ResponseEntity con User si autenticación OK o null de lo contrario
-     */
+    @RequestMapping(path = "/userboard/{mail}",method = RequestMethod.GET)
+    public ResponseEntity<?> buscarBoards(@PathVariable String mail){
+        try{
+            System.out.println("ENTRA GET --> " + mail);
+            return new ResponseEntity<>(imp.getBoardsUser(mail + ".com"), HttpStatus.CREATED);
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
+        }
+    }
+    
+    
+    /*
     @RequestMapping(path = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> doLogin(@RequestBody User user){
@@ -51,5 +58,5 @@ public class LoginController {
         }catch(Exception e){
             return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
         }
-    }
+    }*/
 }

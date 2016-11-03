@@ -17,16 +17,40 @@ public class StandardBackLog implements Backlog{
     
     String nombre;
     String descripcion;
-    ArrayList<Sprint> sprints;
+    ArrayList<Sprint> sprints = new ArrayList<>();
+    
+    public StandardBackLog(){
+    }
+    
+    public StandardBackLog(String nombre, String descripcion){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+    
+    public String getNombre(){
+        return this.nombre;
+    }
+    
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+    
+    public void setDescripcion(String descripcion){
+        this.descripcion = descripcion;
+    }
+    
+    public String getDescripcion(){
+        return descripcion;
+    }
 
     @Override
     public void addSprint(Sprint sprint) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        sprints.add(sprint);
     }
 
     @Override
     public ArrayList<Sprint> getSprints() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return sprints;
     }
     
 }

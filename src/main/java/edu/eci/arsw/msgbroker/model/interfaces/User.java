@@ -1,5 +1,6 @@
 package edu.eci.arsw.msgbroker.model.interfaces;
 
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -12,6 +13,7 @@ public class User {
     String pwd;
     String uname;
     String mail;
+    ArrayList<String> claves = new ArrayList<>();
     
     /**
      * Constructor por defecto
@@ -63,6 +65,14 @@ public class User {
     
     public void setName(String name){
         this.name = name;
+    }
+    
+    public void addClaveBoard(String clave){
+        claves.add(clave);
+    }
+    
+    public ArrayList<String> getClaves(){
+        return claves;
     }
     
     @Override

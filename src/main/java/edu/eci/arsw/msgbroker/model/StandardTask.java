@@ -21,6 +21,49 @@ public class StandardTask implements Task{
     String status;
     Date fechaInicio;
     Date fechaFin;
-    ArrayList<User> usuarios;
+    ArrayList<User> usuarios = new ArrayList<>();
+    
+    public StandardTask(){    
+    }
+    
+    public StandardTask(String nombre, String descripcion, String status){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.status = status;
+    }
+    
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+    
+    public String getNombre(){
+        return nombre;
+    }
+    
+    public void setDescripcion(String descripcion){
+        this.descripcion = descripcion;
+    }
+    
+    public String getDescripcion(){
+        return descripcion;
+    }
+    
+    public void setStatus(String status){
+        this.status = status;
+    }
+    
+    public String getStatus(){
+        return status;
+    }
+
+    @Override
+    public void addUser(User user) {
+        usuarios.add(user);
+    }
+
+    @Override
+    public ArrayList<User> getUsers() {
+        return usuarios;
+    }
     
 }

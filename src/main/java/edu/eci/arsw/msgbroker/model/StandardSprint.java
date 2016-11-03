@@ -21,16 +21,49 @@ public class StandardSprint implements Sprint{
     String status;
     Date fechaInicio;
     Date fechaFin;
-    ArrayList<Task> tareas;
-
+    ArrayList<Task> tareas = new ArrayList<>();
+    
+    public StandardSprint(){
+    }
+    
+    public StandardSprint(String nombre, String descripcion, String status){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.status = status;
+    }
+    
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+    
+    public String getNombre(){
+        return nombre;
+    }
+    
+    public void setDescripcion(String descripcion){
+        this.descripcion = descripcion;
+    }
+    
+    public String getDescripcion(){
+        return descripcion;
+    }
+    
+    public void setStatus(String status){
+        this.status = status;
+    }
+    
+    public String getStatus(){
+        return status;
+    }
+    
     @Override
     public void addTask(Task task) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tareas.add(task);
     }
 
     @Override
     public ArrayList<Task> getTasks() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tareas;
     }
     
 }

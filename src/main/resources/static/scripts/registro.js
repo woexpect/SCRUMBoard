@@ -39,3 +39,8 @@ putRequest = function(nombre, contra, usuario, email) {
         }
     });
 };
+
+$(document).ready(function(){
+    var a = sessionStorage.getItem("user");
+    alert(a);
+});

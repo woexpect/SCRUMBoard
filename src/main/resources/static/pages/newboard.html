@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>SB | Nueva Board</title>
+        <title>SB | Crear Board</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -13,10 +13,9 @@
     <body>
     	<p style="text-align:center"><img src="../resources/logob.png"></p>
     	<br>
+    	<br>
+    	<br>
 		<div class="todo">
-			
-			
-				
 				<form id="formulario">
 					<p class="title" ><br>Crear nuevo Board</p>
 					<input type="text" name="boardname" placeholder=" Nombre de Board" style="width: 80%;">
@@ -25,12 +24,15 @@
 					<div>
 						<input type="email" name="colaborador" placeholder=" Correo Electrónico del usuario del board" id="email"><a href="#"onclick=""><img style="float:right;width:50px;height:50px;margin-top:20px;margin-right:9%;" src="../resources/plusicon.png"></a>
 					</div>
-					<select>
-						<option selected="selected">Seleccione rol del colaborador</option>
-						<option value="SCRUMMaster">SCRUMMaster</option>
-						<option value="SCRUMDeveloper">SCRUMDeveloper</option>
-						<option value="ProductOwner">ProductOwner</option>
-					</select>
+					<br>
+					<div>
+						<select style="margin-top: 75px;">
+							<option selected="selected">Seleccione rol del colaborador</option>
+							<option value="SCRUMMaster">SCRUMMaster</option>
+							<option value="SCRUMDeveloper">SCRUMDeveloper</option>
+							<option value="ProductOwner">ProductOwner</option>
+						</select>
+					</div>
 					
 					<div id="nuevoscol"></div>
 					

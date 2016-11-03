@@ -61,7 +61,7 @@ select{
 
 input{
 	border-color: #333333;
-	border-radius: 5px;
+	border-radius: 3px;
 	height: 40px;
 	display: block;
 	margin-left: auto;

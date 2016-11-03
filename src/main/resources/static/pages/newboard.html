@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>SB | Registrar</title>
+        <title>SB | Nueva Board</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -18,14 +18,23 @@
 			
 				
 				<form id="formulario">
-					<p class="title" ><br><br>Crear nuevo Board</p>
-					<input type="text" name="usuario" placeholder=" Nombre de usuario">
-					<input type="text" name="nombres" placeholder=" Nombres">
-					<input type="text" name="apellidos" placeholder=" Apellidos">
-					<input type="email" name="correo" placeholder=" Correo Electrónico">
-					<input type="password" name="passw" placeholder=" Contraseña" class="pw">
-					<input type="password" name="passwcorrecto" placeholder=" Reingrese su contraseña" class="pw">
-					<button class="signup">Resgistrar su cuenta</button>
+					<p class="title" ><br>Crear nuevo Board</p>
+					<input type="text" name="boardname" placeholder=" Nombre de Board" style="width: 80%;">
+					<input type="text" name="descripcion" placeholder=" Descripcion de Board" id="description" style="width: 80%;">
+					<input type="password" name="password" placeholder=" Contraseña" style="width: 80%;">
+					<div>
+						<input type="email" name="colaborador" placeholder=" Correo Electrónico del usuario del board" id="email"><a href="#"onclick=""><img style="float:right;width:50px;height:50px;margin-top:20px;margin-right:9%;" src="../resources/plusicon.png"></a>
+					</div>
+					<select>
+						<option selected="selected">Seleccione rol del colaborador</option>
+						<option value="SCRUMMaster">SCRUMMaster</option>
+						<option value="SCRUMDeveloper">SCRUMDeveloper</option>
+						<option value="ProductOwner">ProductOwner</option>
+					</select>
+					
+					<div id="nuevoscol"></div>
+					
+					<button class="signup" title="buzz hover text">Crear Board</button>
 				</form>
 				<br>
 			

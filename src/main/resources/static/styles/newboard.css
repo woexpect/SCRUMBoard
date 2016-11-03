@@ -8,16 +8,24 @@ img{
 	height: 125px;
 }
 
+#description{
+	height:100px;
+}
+
+#email{
+	width: 70%;
+	float:left;
+	margin-left:9.5%
+}
 
 .todo{
 	background-color: #D8D8D8;
+	margin-top:-5%;
 	margin-right:25%;
 	margin-left:25%;
 	border-radius: 5px;
 	min-width: 50%; 
 	max-width: 50%; 
-	min-height: 660px; 
-	max-height: 660px;
 }
 
 .registro{
@@ -42,10 +50,18 @@ img{
 	font-family: lato;
 }
 
+select{
+	border-color: #333333;
+	border-radius: 5px;
+	height: 40px;
+	display: block;
+	margin-left:9.5%;
+	margin-top: 25px;
+}
+
 input{
 	border-color: #333333;
 	border-radius: 5px;
-	width: 80%;
 	height: 40px;
 	display: block;
 	margin-left: auto;

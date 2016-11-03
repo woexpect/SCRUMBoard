@@ -2,48 +2,20 @@ body{
 	background-color: #333333;
 }
 
-.derecha{
-	width: 500px;
-	margin-left: auto;
-	float:right;
-	margin-top:20px;
-	margin-right:20px;
-	
-}
-
-.titulopropaganda{
-	color: #00B8D4;
-	font-size: 20pt;
-	font-family: lato;
-}
-
-.bodypropaganda{
-	font-size: 15pt;
-	
-}
-
-.izquierda{
-	margin-right: auto;
-	min-width: 800px;
-	max-width: 800px;
-	float:left;
-	margin-top: 20px;
-	margin-left: 20px;
-}
 
 img{
-	width: 150px;
-	height: 150px;
-	margin-left: 43%;
-	margin-top: 25px;
+	width: 125px;
+	height: 125px;
 }
+
 
 .todo{
 	background-color: #D8D8D8;
+	margin-right:25%;
+	margin-left:25%;
 	border-radius: 5px;
-	min-width: 1340px; 
-	margin: 0 auto; 
-	max-width: 1340px; 
+	min-width: 50%; 
+	max-width: 50%; 
 	min-height: 660px; 
 	max-height: 660px;
 }

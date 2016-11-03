@@ -12,33 +12,48 @@
 
     <body>
     	<img id="scrumimg" src="../resources/logoc.png">
+		<img id="notificationimg" src="../resources/usericon.png">
 		<img id="notificationimg" src="../resources/notification.png">
+		<img id="notificationimg" src="../resources/configicon.png">
+		
     	<br>
-		<div class="todo">
+		
+		<div class="contenedor">
+		
 			<div class="izquierda">
-				<p class="titulopropaganda">Se un SCRUMMaster</p>
-				<p class="bodypropaganda">Desarrolla nuevas SCRUMBoards para que puedas ver en tiempo real las tareas que se tienen por hacer y cuales ya estan hechas por tus compañeros de trabajo!</p>
-				<p class="titulopropaganda">Se un SCRUMDeveloper</p>
-				<p class="bodypropaganda">Mira en tiempo real las tareas que tienes asignadas y con que tareas estan teniendo dificultades tus compañeros de trabajo para que les des una mano!</p>
-				<p class="titulopropaganda">Se un SCRUMproductOwner</p>
-				<p class="bodypropaganda">Puedes ver estadisticas sobre el desarrollo de un proyecto para que puedas tener una vision mas amplia sobre su avance y dificultades.</p>
+				<p style="color:grey;"><br><br>&nbsp;Navegacion<br><br><p/>
+				<ul>
+					<div id="home">
+						<img style="float:left;height:35px;width:35px; position:absolute;margin-top:6px;" src="../resources/home.png">
+						<li class="selected"><a class="menuizq" href ="#">DashBoard</a></li>
+					</div>
+					<li class="sidemenu"><a class="menuizq" href ="#">&nbsp;&nbsp;&nbsp;DashBoard 1</a></li>
+					<li class="sidemenu"><a class="menuizq" href ="#">&nbsp;&nbsp;&nbsp;DashBoard 2</a></li>
+					<li class="sidemenu"><a class="menuizq" href ="#">&nbsp;&nbsp;&nbsp;DashBoard 3</a></li>
+				</ul>
+				
 			</div>
-		<div class="derecha">
-			<div class="registro">
-				<p class="title">Registra tu nueva cuenta</p>
-				<form>
-					<input type="text" name="usuario" placeholder=" Nombre de usuario">
-					<input type="text" name="nombres" placeholder=" Nombres">
-					<input type="text" name="apellidos" placeholder=" Apellidos">
-					<input type="email" name="correo" placeholder=" Correo Electrónico">
-					<input type="password" name="passw" placeholder=" Contraseña" class="pw">
-					<input type="password" name="passwcorrecto" placeholder=" Reingrese su contraseña" class="pw">
-					<button class="signup">Resgistrar su cuenta</button>
-				</form>
-				<br>
-				<hr width="90%">
+		
+			<div class="derecha">
+				<a href="newboard.html"><img style="float:right;width:50px;height:50px;margin-top:20px;margin-right:20px;" src="../resources/plusicon.png"></a>
+				<h1 id="nombredash" style="color:grey; margin-top:30px;margin-left:30px;">DashBoard</h1>
+				<p id="descripcion_dash" style="margin-left:30px;">Welcome to Ubold admin panel</p>
+				<div id="recuadro_boards">
+					<div class="board" id="board1">
+						<div class="circle" style="background: #D7F6FB;"></div>
+					</div>
+					<div class="board" id="board2">
+						<div class="circle" style="background: #FEE3AC;"></div>
+					</div>
+					<div class="board" id="board3">
+						<div class="circle" style="background: #E6F5E2;"></div>
+					</div>
+				
+					
+				</div>
 			</div>
+			
 		</div>
-		</div>
+		
     </body>
 </html>

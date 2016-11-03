@@ -78,6 +78,7 @@ public class InMemoryPersistence{
         return res;
     }
 
+    
     //====================================================================================================================================================
     
     private void preloadBoards() {
@@ -127,6 +128,7 @@ public class InMemoryPersistence{
             res = "El colaborador descrito ya está agregado en el board.";
         }else{
             res = "Colaborador agregado satisfactoriamente.";
+            users.get(mail).addClaveBoard(clave);
             boards.get(clave).addCollaborator(mail);            
         }
         return res;

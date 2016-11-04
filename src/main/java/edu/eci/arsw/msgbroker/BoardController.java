@@ -54,9 +54,10 @@ public class BoardController {
         try{
             System.out.println("ENTRA POST --> " + board);
             String creado = imp.crearBoard(board);
+            System.out.println("Board: " + creado);
             return new ResponseEntity<>(creado,HttpStatus.CREATED);                
         }catch(Exception e){
-            return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
+            return new ResponseEntity<>("Error al agregar el board.",HttpStatus.FORBIDDEN);  
         }
     }
     

@@ -29,10 +29,11 @@ html, body {
     height: 100px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
-	position:absolute;
 	margin-top:10px;
 	margin-left:10px;
     border-radius: 50px;
+    display: inline;
+    float: left;
 }
 
 .board{
@@ -147,4 +148,56 @@ p{
 input:focus{
 	border-color: #00B8D4;
 	outline: none;
+}
+
+.ulh{
+	width: 1366px;
+	font-family: roboto;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #666666;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.lih{
+	float: left;
+}
+
+.lih a{
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 15px;
+	text-decoration: none;
+}
+
+.lih a:hover{
+	text-decoration: underline;
+}
+
+.der{
+	float: right;
+}
+
+.logo{
+	width: 30px;
+	height: 30px;
+	margin: 5px;
+}
+
+.icon{
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
+}
+
+.inline{
+	display: inline;
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+	font-family: roboto;
 }

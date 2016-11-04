@@ -7,7 +7,24 @@ function registro() {
     
     if(usuario !== "" && email !== "" && contra !== "" && contraConfirmacion !== "" && nombre !== ""){
         if(contra === contraConfirmacion) { 
-            putRequest(nombre, contra, usuario, email);
+            $.ajax({
+                url: '/register/user',
+                type: 'POST',
+                data: JSON.stringify({
+                    name: nombre,
+                    pwd: contra,
+                    uname: usuario,
+                    mail: email
+                }),
+                contentType: "application/json",
+                success: function(data) {
+                    window.location = "http://localhost:8080/pages/login.html";
+                    alert(data);
+                },
+                error: function(xhr, status){
+                    alert("No se ha podido registrar su información, por favor, verifiquela.");
+                }
+            });
         }
         else{
             alert("Las contraseñas no coinciden.");
@@ -19,28 +36,3 @@ function registro() {
    
 }
 
-putRequest = function(nombre, contra, usuario, email) {
-    return $.ajax({
-        url: '/register/user',
-        type: 'POST',
-        data: JSON.stringify({
-            name: nombre,
-            pwd: contra,
-            uname: usuario,
-            mail: email
-        }),
-        contentType: "application/json",
-        success: function(data) {
-            window.location = "http://localhost:8080/pages/login.html";
-            alert(data);
-        },
-        error: function(xhr, status){
-            alert("No se ha podido registrar su información, por favor, verifiquela.");
-        }
-    });
-};
-
-$(document).ready(function(){
-    var a = sessionStorage.getItem("user");
-    alert(a);
-});

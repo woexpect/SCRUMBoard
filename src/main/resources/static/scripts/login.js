@@ -25,4 +25,5 @@ function login(){
 
 function sessionData(data){
     sessionStorage.setItem("user", data.name);
+    sessionStorage.setItem("mail", data.mail);
 }

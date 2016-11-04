@@ -7,14 +7,19 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../styles/dashboard.css">
 		<link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
-		<script type="text/javascript" src="../scripts/main.js"></script>
+		<script type="text/javascript" src="../scripts/dashboard.js"></script>
     </head>
 
     <body>
-    	<img id="scrumimg" src="../resources/logoc.png">
-		<img id="notificationimg" src="../resources/usericon.png">
-		<img id="notificationimg" src="../resources/notification.png">
-		<img id="notificationimg" src="../resources/configicon.png">
+    	<div>
+			<ul class="ulh" style="margin-top:10px;"">
+				<li class="lih"><img src="../resources/logo.png" class="logo"></li>
+				<li class="lih"><a href="../index.html">SCRUMBoard</a></li>
+				<li class="lih der"><a href="pages/login.html"><img src="../resources/notification.png" class="icon"></a></li>
+				<li class="lih der"><a href="pages/login.html"><img src="../resources/user.png" class="icon"></a></li>
+				<li class="lih der"><a id="username"><img src="../resources/user.png" class="icon"></a></li>
+			</ul>
+		</div>		
 		
     	<br>
 		
@@ -39,17 +44,6 @@
 				<h1 id="nombredash" class="lato" style="color:grey; margin-top:30px;margin-left:30px;">DashBoard</h1>
 				<p id="descripcion_dash" style="margin-left:30px;">Welcome to Ubold admin panel</p>
 				<div id="recuadro_boards">
-					<div class="board" id="board1">
-						<div class="circle" style="background: #D7F6FB;"></div>
-					</div>
-					<div class="board" id="board2">
-						<div class="circle" style="background: #FEE3AC;"></div>
-					</div>
-					<div class="board" id="board3">
-						<div class="circle" style="background: #E6F5E2;"></div>
-					</div>
-				
-					
 				</div>
 			</div>
 			

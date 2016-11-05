@@ -14,6 +14,7 @@ $(document).ready(function(){
     cargarBoards()
     .then(function (){
         $.get("https://scrumboardarsw.herokuapp.com/board/userboard/"+mail, function(data, status){
+            alert("correo: " + mail + " datos: " + data);
             boards = data;
         });
         return cargarBoards()

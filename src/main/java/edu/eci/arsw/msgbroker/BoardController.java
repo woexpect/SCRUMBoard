@@ -39,7 +39,9 @@ public class BoardController {
     @RequestMapping(path = "/userboard/{mail}",method = RequestMethod.GET)
     public ResponseEntity<?> buscarBoardsUsuario(@PathVariable String mail){
         try{
-            System.out.println("ENTRA GET --> " + mail);
+            System.out.println("------------------Start[[buscarBoardsUsuario]]");
+            System.out.println("mail: " + mail + ".com");
+            System.out.println("------------------End[[buscarBoardsUsuario]]");
             return new ResponseEntity<>(imp.getBoardsUser(mail + ".com"), HttpStatus.CREATED);
         }catch(Exception e){
             e.printStackTrace();
@@ -52,9 +54,11 @@ public class BoardController {
     @ResponseBody
     public ResponseEntity<?> createBoard(@RequestBody StandardBoard board){
         try{
+            System.out.println("------------------Start[[createBoard]]");
             System.out.println("ENTRA POST --> " + board);
             String creado = imp.crearBoard(board);
             System.out.println("Board: " + creado);
+            System.out.println("------------------End[[createBoard]]");
             return new ResponseEntity<>(creado,HttpStatus.CREATED);                
         }catch(Exception e){
             return new ResponseEntity<>("Error al agregar el board.",HttpStatus.FORBIDDEN);  
@@ -65,8 +69,10 @@ public class BoardController {
     @ResponseBody
     public ResponseEntity<?> agregarColaborador(@PathVariable String clave, @RequestBody String mail){
         try{
+            System.out.println("------------------Start[[agregarColaborador]]");
             System.out.println("ENTRA POST --> " + mail);
             String creado = imp.agregarColaborador(mail, clave);
+            System.out.println("------------------End[[agregarColaborador]]");
             return new ResponseEntity<>(creado,HttpStatus.CREATED);                
         }catch(Exception e){
             return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  

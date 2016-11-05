@@ -8,16 +8,16 @@ $(document).ready(function(){
         return new Promise(function(done, reject){
             setTimeout(function (){
                 done()
-            }, 100)
+            }, 1000)
         })
     }
     cargarBoards()
     .then(function (){
-        $.get("https://scrumboardarsw.herokuapp.com/board/userboard/"+mail, function(data, status){
+        $.get("/board/userboard/"+mail, function(data, status){
             alert("correo: " + mail + " datos: " + data);
             boards = data;
         });
-        return cargarBoards()
+        return cargarBoards();
     })
     .then(function (){
         for(i = 0; i < boards.length; i++){
@@ -25,6 +25,6 @@ $(document).ready(function(){
         }
     })
     .catch(function(err){
-        alert("ERROR" + err);
+        alert("ERROR ---> " + err);
     });
 });

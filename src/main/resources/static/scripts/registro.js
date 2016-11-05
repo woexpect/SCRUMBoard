@@ -8,22 +8,19 @@ function registro() {
     if(usuario !== "" && email !== "" && contra !== "" && contraConfirmacion !== "" && nombre !== ""){
         if(contra === contraConfirmacion) { 
             $.ajax({
-                url: '/register/user',
-                type: 'POST',
+                type: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
+                url: "/register/user", // A valid URL
+                headers: {"X-HTTP-Method-Override": "POST", "Content-Type": "application/json"},
                 data: JSON.stringify({
                     name: nombre,
                     pwd: contra,
                     uname: usuario,
                     mail: email
-                }),
-                contentType: "application/json",
-                success: function(data) {
-                    window.location = "http://localhost:8080/pages/login.html";
-                    alert(data);
-                },
-                error: function(xhr, status){
-                    alert("No se ha podido registrar su información, por favor, verifiquela.");
-                }
+                })
+            }).then(function(data){
+                alert(data);
+            }).fail(function(response){
+                alert("No se ha podido registrar su información, por favor, verifiquela. Err: " + response);
             });
         }
         else{
@@ -35,4 +32,3 @@ function registro() {
     }
    
 }
-

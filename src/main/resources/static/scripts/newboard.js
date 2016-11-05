@@ -4,6 +4,7 @@ function add(){
     var name = $("#boardname").val();
     var desc = $("#descripcion").val();
     var clv = $("#clave").val();
+    var res;
 
     if(name != "" && desc != "" && clave != ""){
         $.ajax({
@@ -15,21 +16,16 @@ function add(){
                 clave: clv
             }),
             contentType: "application/json",
-            success: function(data) {        
+            success: function(data) {
                 alert(data);
-            },
-            error: function(xhr, status){
-                alert("No se ha podido registrar su información, por favor, verifiquela.");
-            }
-        });
-
-        $.ajax({
-            url: '/board/'+clv,
-            type: 'POST',
-            data: mail,
-            contentType: "application/json",
-            success: function(data) {        
-                alert(data);
+                if(data === "Se ha registrado el board correctamente."){
+                    $.ajax({
+                        url: '/board/'+clv,
+                        type: 'POST',
+                        data: mail,
+                        contentType: "application/json"
+                    });
+                }
             },
             error: function(xhr, status){
                 alert("No se ha podido registrar su información, por favor, verifiquela.");

@@ -13,7 +13,7 @@ $(document).ready(function(){
     }
     cargarBoards()
     .then(function (){
-        $.get("/board/userboard/"+mail, function(data, status){
+        $.get("../board/userboard/"+mail, function(data, status){
             boards = data;
         });
         return cargarBoards()

@@ -43,7 +43,7 @@ public class BoardController {
             return new ResponseEntity<>(imp.getBoardsUser(mail + ".com"), HttpStatus.CREATED);
         }catch(Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
+            return new ResponseEntity<>("Error al obtener boards de usuario.",HttpStatus.FORBIDDEN);  
         }
     }
     

@@ -1,13 +1,16 @@
 package edu.eci.arsw.msgbroker;
 
 import edu.eci.arsw.msgbroker.model.StandardBoard;
+import edu.eci.arsw.msgbroker.model.StandardBoard;
 import edu.eci.arsw.msgbroker.model.interfaces.Board;
 import edu.eci.arsw.msgbroker.model.interfaces.User;
 import edu.eci.arsw.msgbroker.services.InMemoryPersistence;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,10 @@ public class BoardController {
     
     @Autowired
     InMemoryPersistence imp;
+    
+    @Autowired
+    SimpMessagingTemplate msgt;    
+    
 
     @RequestMapping(path = "/{clave}",method = RequestMethod.GET)
     public ResponseEntity<?> test(@PathVariable String clave){
@@ -42,6 +49,11 @@ public class BoardController {
             System.out.println("------------------Start[[buscarBoardsUsuario]]");
             System.out.println("mail: " + mail + ".com");
             System.out.println("------------------End[[buscarBoardsUsuario]]");
+            ArrayList<Board> boards = imp.getBoardsUser(mail+".com");
+            for(int i=0; i < boards.size(); i++){
+                msgt.convertAndSend("/topic/userboard/{mail}", boards.get(i));
+            }
+
             return new ResponseEntity<>(imp.getBoardsUser(mail + ".com"), HttpStatus.CREATED);
         }catch(Exception e){
             e.printStackTrace();

@@ -13,9 +13,11 @@ function login(){
            mail: c
         })
     }).then(function(data){
-        window.location = "dashboard.html";
+        timeout: 3000;
         sessionData(data);
         alert("Bienvenido, " + data.name);
+        timeout: 3000;
+        $(window).attr('location', 'dashboard.html');
     }).fail(function(response){
         alert("Usted no se ha autenticado correctamente.");
     });

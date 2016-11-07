@@ -1,9 +1,7 @@
 package edu.eci.arsw.msgbroker;
 
 import edu.eci.arsw.msgbroker.model.StandardBoard;
-import edu.eci.arsw.msgbroker.model.StandardBoard;
 import edu.eci.arsw.msgbroker.model.interfaces.Board;
-import edu.eci.arsw.msgbroker.model.interfaces.User;
 import edu.eci.arsw.msgbroker.services.InMemoryPersistence;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +51,6 @@ public class BoardController {
             for(int i=0; i < boards.size(); i++){
                 msgt.convertAndSend("/topic/userboard/{mail}", boards.get(i));
             }
-
             return new ResponseEntity<>(imp.getBoardsUser(mail + ".com"), HttpStatus.CREATED);
         }catch(Exception e){
             e.printStackTrace();

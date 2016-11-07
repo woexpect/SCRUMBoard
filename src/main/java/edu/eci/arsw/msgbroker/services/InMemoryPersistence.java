@@ -88,8 +88,8 @@ public class InMemoryPersistence{
         boards.put(a.getClave(), a);
         boards.put(b.getClave(), b);
         boards.put(c.getClave(), c);
-        addColaborador("sebasp95@hotmail.com", "ARSQ20165");
-        addColaborador("sebasp95@hotmail.com", "PSIS30");
+        addColaborador("sebasp95@hotmail.com1", "ARSQ20165");
+        addColaborador("sebasp95@hotmail.com1", "PSIS30");
         addBackLog("BackLog ARSW", "Backlog para el proyecto ARSW", "ARSQ20165");
         addSprint("Sprint 1 ARSW", "Sprint 1 para el proyecto ARSW", "En curso" ,"ARSQ20165");
         addSprint("Sprint 2 ARSW", "Sprint 2 para el proyecto ARSW", "Terminado" ,"ARSQ20165");
@@ -128,7 +128,7 @@ public class InMemoryPersistence{
             res = "El colaborador descrito ya está agregado en el board.";
         }else{
             res = "Colaborador agregado satisfactoriamente.";
-            users.get(mail).addClaveBoard(clave);
+            users.get(mail.substring(0, mail.length()-1)).addClaveBoard(clave);
             boards.get(clave).addCollaborator(mail);            
         }
         return res;

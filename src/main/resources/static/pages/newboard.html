@@ -22,19 +22,22 @@
 					<input type="text" id="descripcion" placeholder=" Descripcion de Board" id="description" style="width: 80%;">
 					<input type="clave" id="clave" placeholder=" Clave" style="width: 80%;">
 					<div>
-						<input type="email" name="colaborador" placeholder=" Correo Electrónico del usuario del board" id="email"><a href="#"onclick=""><img style="float:right;width:50px;height:50px;margin-top:20px;margin-right:9%;" src="../resources/plusicon.png"></a>
+						<input type="email" name="colaborador" placeholder=" Correo Electrónico del usuario del board" id="email"><a href="#" onclick="addColab()"><img style="float:right;width:50px;height:50px;margin-top:20px;margin-right:9%;" src="../resources/plusicon.png"></a>
 					</div>
 					<br>
 					<div>
-						<select style="margin-top: 75px;">
+						<select id="roles" style="margin-top: 75px;">
 							<option selected="selected">Seleccione rol del colaborador</option>
-							<option value="SCRUMMaster">SCRUMMaster</option>
 							<option value="SCRUMDeveloper">SCRUMDeveloper</option>
 							<option value="ProductOwner">ProductOwner</option>
 						</select>
 					</div>
 					
-					<div id="nuevoscol"></div>
+					<div style="margin-top:20px; margin-left: 60px;">
+						Lista de Colaboradores:
+						<ul id="colab">
+						</ul>
+					</div>
 					
 					<button class="signup" title="buzz hover text" onclick="add()">Crear Board</button>
 				</form>

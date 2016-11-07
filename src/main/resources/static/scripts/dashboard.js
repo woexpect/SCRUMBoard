@@ -49,12 +49,28 @@ $(document).ready(function(){
     })
     .then(function (){
         timeout: 3000;
+        var color;
         for(i = 0; i < boards.length; i++){
-            $("#recuadro_boards").append("<div class='board' id='board" + i + "'> <div><div class='circle' style='background: #FEE3AC;'></div><div class='inline'><h1>" + boards[i].nombre + "</h1><p>" + boards[i].descripcion + "</p></div></div></div>");
-            $("#menuside").append("<li class='sidemenu'><a class='menuizq' href ='#'>" + boards[i].nombre + "</a></li>")
+            for(j = 0; j < boards[i].collaborators.length; j++){
+                if(mail == boards[i].collaborators[j].substring(0,boards[i].collaborators[j].length-1)){
+                    if(boards[i].collaborators[j].substring(boards[i].collaborators[j].length-1,boards[i].collaborators[j].length) == "1"){
+                        color = "#03A9F4";
+                    }else if(boards[i].collaborators[j].substring(boards[i].collaborators[j].length-1,boards[i].collaborators[j].length) == "2"){
+                        color = "#4CAF50";
+                    }else if(boards[i].collaborators[j].substring(boards[i].collaborators[j].length-1,boards[i].collaborators[j].length) == "3"){
+                        color = "#FFEB3B";
+                    }
+                    $("#recuadro_boards").append("<div class='board' id='board" + i + "'> <div><div class='circle' style='background: " + color + ";'></div><div class='inline'><h1>" + boards[i].nombre + "</h1><p>" + boards[i].descripcion + "</p></div></div></div>");
+                    $("#menuside").append("<li class='sidemenu'><a class='menuizq' href ='#'>" + boards[i].nombre + "</a></li>")
+                }
+            }
         }
     })
     .catch(function(err){
         alert("ERROR ---> " + err);
     });
 });
+
+function logout(){
+    sessionStorage.clear();
+}

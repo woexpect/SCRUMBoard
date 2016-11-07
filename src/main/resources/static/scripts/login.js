@@ -3,6 +3,7 @@ function login(){
     var p = $("#pass").val();
 
     $.ajax({
+        timeout: 3000,
         type: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
         url: "/login/user/", // A valid URL
         headers: {"X-HTTP-Method-Override": "POST", "Content-Type": "application/json"},
@@ -12,12 +13,9 @@ function login(){
            uname: "",
            mail: c
         })
-    }).then(function(data){
-        timeout: 3000;
+    }).then(function(data){        
         sessionData(data);
         alert("Bienvenido, " + data.name);
-        timeout: 3000;
-        $(window).attr('location', 'dashboard.html');
     }).fail(function(response){
         alert("Usted no se ha autenticado correctamente.");
     });
@@ -26,4 +24,5 @@ function login(){
 function sessionData(data){
     sessionStorage.setItem("user", data.name);
     sessionStorage.setItem("mail", data.mail);
+    window.location = "dashboard.html";
 }

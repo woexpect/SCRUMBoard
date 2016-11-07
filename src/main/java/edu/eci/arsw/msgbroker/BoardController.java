@@ -41,6 +41,11 @@ public class BoardController {
         }
     }
     
+    /**
+     * Este controlador se encarga de entregar los boards del usuario con el email dado.
+     * @param mail Correo del usuario del cual se solicitan sus boards.
+     * @return ArrayList con los boards a los cuales el usuario está suscrito.
+     */
     @RequestMapping(path = "/userboard/{mail}",method = RequestMethod.GET)
     public ResponseEntity<?> buscarBoardsUsuario(@PathVariable String mail){
         try{
@@ -58,7 +63,11 @@ public class BoardController {
         }
     }
     
-    
+    /**
+     * Controlador que se encarga de agregar boards a la persistencia del proyecto.
+     * @param board Objeto JSON con la información del board a crear.
+     * @return String con respuesta de la transacción.
+     */
     @RequestMapping(path = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> createBoard(@RequestBody StandardBoard board){
@@ -74,6 +83,12 @@ public class BoardController {
         }
     }
     
+    /**
+     * Controlador que se encarga de agregar colaboradores a los boards dada su clave y mail de colaborador.
+     * @param clave
+     * @param mail
+     * @return 
+     */
     @RequestMapping(path = "/{clave}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> agregarColaborador(@PathVariable String clave, @RequestBody String mail){

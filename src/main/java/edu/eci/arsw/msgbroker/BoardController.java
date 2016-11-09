@@ -1,6 +1,7 @@
 package edu.eci.arsw.msgbroker;
 
 import edu.eci.arsw.msgbroker.model.StandardBoard;
+import edu.eci.arsw.msgbroker.model.StandardSprint;
 import edu.eci.arsw.msgbroker.model.interfaces.Board;
 import edu.eci.arsw.msgbroker.services.InMemoryPersistence;
 import java.util.ArrayList;
@@ -92,6 +93,20 @@ public class BoardController {
             System.out.println("------------------Start[[agregarColaborador]]");
             System.out.println("ENTRA POST --> " + mail);
             String creado = imp.agregarColaborador(mail, clave);
+            System.out.println("------------------End[[agregarColaborador]]");
+            return new ResponseEntity<>(creado,HttpStatus.CREATED);                
+        }catch(Exception e){
+            return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
+        }
+    }
+    
+    @RequestMapping(path = "/sprint/{clave}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> agregarSprint(@PathVariable String clave, @RequestBody StandardSprint sprint){
+        try{
+            System.out.println("------------------Start[[agregarColaborador]]");
+            System.out.println("ENTRA POST --> " + sprint);
+            String creado = imp.agregarSprint(clave, sprint);
             System.out.println("------------------End[[agregarColaborador]]");
             return new ResponseEntity<>(creado,HttpStatus.CREATED);                
         }catch(Exception e){

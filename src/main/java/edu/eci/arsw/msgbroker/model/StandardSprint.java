@@ -65,5 +65,15 @@ public class StandardSprint implements Sprint{
     public ArrayList<Task> getTasks() {
         return tareas;
     }
+
+    @Override
+    public String calcularHoras() {
+        String res = "";
+        if(tareas.size() == 0){
+            res = "No hay tareas para calcular el estimado de este Sprint.";
+        }else{
+        }
+        return res;
+    }
     
 }

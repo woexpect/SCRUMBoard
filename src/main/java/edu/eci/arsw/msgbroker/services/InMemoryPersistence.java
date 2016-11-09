@@ -162,4 +162,15 @@ public class InMemoryPersistence{
         }
         return res;
     }
+    
+    public String agregarSprint(String clave, Sprint sprint){
+        String res = "Fallo al agregar el Sprint.";
+        try{
+            boards.get(clave).getBackLog().addSprint(sprint);
+            res = "Sprint agregado satisfactoriamente.";
+        }catch(Exception e){
+            System.out.println("Error --> " + e.getMessage());
+        }
+        return res;
+    }
 }

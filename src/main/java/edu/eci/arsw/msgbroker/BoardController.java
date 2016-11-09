@@ -52,10 +52,6 @@ public class BoardController {
             System.out.println("------------------Start[[buscarBoardsUsuario]]");
             System.out.println("mail: " + mail + ".com");
             System.out.println("------------------End[[buscarBoardsUsuario]]");
-            ArrayList<Board> boards = imp.getBoardsUser(mail+".com");
-            for(int i=0; i < boards.size(); i++){
-                msgt.convertAndSend("/topic/userboard/{mail}", boards.get(i));
-            }
             return new ResponseEntity<>(imp.getBoardsUser(mail + ".com"), HttpStatus.CREATED);
         }catch(Exception e){
             e.printStackTrace();

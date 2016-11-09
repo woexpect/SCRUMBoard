@@ -1,5 +1,6 @@
 var stompClient = null;
 var mail = null;
+var boards;
 
 function connect() {
     var socket = new SockJS('/stompendpoint');
@@ -7,7 +8,7 @@ function connect() {
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
 
-        alert(mail);
+        //alert(mail);
         //stompClient.subscribe('/topic/userlogin/{'+mail+'}', function (data) {
         stompClient.subscribe('/topic/userboard/{sebasp95@hotmail.com}', function (data) {    
             var objetoJson = JSON.parse(data.body);
@@ -26,8 +27,6 @@ function disconnect() {
 
 
 $(document).ready(function(){
-    
-    var boards;
     var username = sessionStorage.getItem("user");
     mail = sessionStorage.getItem("mail");
     $("#username").text(username);
@@ -60,8 +59,8 @@ $(document).ready(function(){
                     }else if(boards[i].collaborators[j].substring(boards[i].collaborators[j].length-1,boards[i].collaborators[j].length) == "3"){
                         color = "#FFEB3B";
                     }
-                    $("#recuadro_boards").append("<div class='board' id='board" + i + "'> <div><div class='circle' style='background: " + color + ";'></div><div class='inline'><h1>" + boards[i].nombre + "</h1><p>" + boards[i].descripcion + "</p></div></div></div>");
-                    $("#menuside").append("<li class='sidemenu'><a class='menuizq' href ='#'>" + boards[i].nombre + "</a></li>")
+                    $("#recuadro_boards").append("<div class='board' onclick='goToBoard(this)' id='board" + i + "'> <div><div class='circle' style='background: " + color + ";'></div><div class='inline'><h1>" + boards[i].nombre + "</h1><p>" + boards[i].descripcion + "</p></div></div></div>");
+                    $("#menuside").append("<li class='sidemenu' onclick='goToBoard()'><a class='menuizq' href ='#'>" + boards[i].nombre + "</a></li>")
                 }
             }
         }
@@ -73,4 +72,10 @@ $(document).ready(function(){
 
 function logout(){
     sessionStorage.clear();
+}
+
+function goToBoard(elem){
+    var id = elem.id;
+    sessionStorage.setItem("boardSprint",id.substring(id.length-1, id.length));
+    window.location = "sprintView.html";   
 }

@@ -158,6 +158,7 @@ public class InMemoryPersistence{
         }else{
             res = "Se ha registrado el board correctamente.";
             boards.put(board.getClave(), board);
+            boards.get(board.getClave()).crearBacklog(board.getClave());
         }
         return res;
     }

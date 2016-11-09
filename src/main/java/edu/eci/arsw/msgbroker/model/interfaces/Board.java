@@ -18,4 +18,5 @@ public interface Board {
     public void addBackLog(Backlog backlog);
     public String getClave();
     public Backlog getBackLog();
+    public void crearBacklog(String clave);
 }

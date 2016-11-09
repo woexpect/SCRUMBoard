@@ -187,6 +187,7 @@ input:focus{
 }
 
 .sprint{
+	font-family: roboto;
 	float:left;
 	min-height:93%;
 	max-height:93%;
@@ -214,7 +215,7 @@ input:focus{
 	text-decoration: none;
 	float:right;
 	margin-right:5px;
-	color: #c4f9bb;
+	color: #009688;
 	margin-top:125%;
 	
 }

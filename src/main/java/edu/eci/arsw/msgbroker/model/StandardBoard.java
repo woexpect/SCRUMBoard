@@ -2,7 +2,6 @@ package edu.eci.arsw.msgbroker.model;
 
 import edu.eci.arsw.msgbroker.model.interfaces.Backlog;
 import edu.eci.arsw.msgbroker.model.interfaces.Board;
-import edu.eci.arsw.msgbroker.model.interfaces.User;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +17,11 @@ public class StandardBoard implements Board{
     Backlog backlogBoard;
     
     public StandardBoard(){
+    }
+    
+    @Override
+    public void crearBacklog(String clave){
+        backlogBoard = new StandardBackLog("Backlog de proyecto " + clave, "");
     }
     
     public StandardBoard(String nombre, String descripcion, String clave){

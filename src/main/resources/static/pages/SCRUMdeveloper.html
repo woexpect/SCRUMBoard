@@ -1,48 +1,79 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>SB | Registrar</title>
+        <title>SB | DashBoard</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../styles/SCRUMdeveloper.css">
 		<link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
-		<script type="text/javascript" src="../scripts/main.js"></script>
+		<script type="text/javascript" src="../scripts/sprint.js"></script>
+        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     </head>
 
     <body>
-    	<img src="../resources/logob.png">
-		<div class="Resumen">
-				<p class="NameBoard">Nombre de Board:</p>
-				<p class="Colaboradores">Colaboradores:</p>
-				<p class="ResumenProyecto">Este proyecto consiste en la creacion de la aplicacion SCRUMboard</p>
-				<p class="ObjetivosCompletados">Tareas completadas: / </p>
-		</div>
-		<br>
-		<div class="todo">
+    	<div>
+			<ul class="ulh" style="margin-top:10px;"">
+				<li class="lih"><img src="../resources/logo.png" class="logo"></li>
+				<li class="lih"><a href="../index.html">SCRUMBoard</a></li>
+				<li class="lih der"><a href="pages/login.html"><img src="../resources/notification.png" class="icon"></a></li>
+				<li class="lih der"><a href="pages/login.html"><img src="../resources/user.png" class="icon"></a></li>
+				<li class="lih der"><a id="username"><img src="../resources/user.png" class="icon"></a></li>
+			</ul>
+		</div>		
 		
-			
-			
-			<div class="fulldash">
+    	<br>
+		
+			<div class="izquierda">
+				<p style="color:grey;"><br><br>&nbsp;Navegacion<br><br><p/>
+				<ul>
+					<div id="home">
+						<img style="float:left;height:35px;width:35px; position:absolute;margin-top:6px;" src="../resources/home.png">
+						<li class="selected"><a class="menuizq " href ="#">DashBoard</a></li>
+					</div>
+					<li class="sidemenu"><a class="menuizq" href ="#">&nbsp;&nbsp;&nbsp;DashBoard 1</a></li>
+					<li class="sidemenu"><a class="menuizq" href ="#">&nbsp;&nbsp;&nbsp;DashBoard 2</a></li>
+					<li class="sidemenu"><a class="menuizq" href ="#">&nbsp;&nbsp;&nbsp;DashBoard 3</a></li>
+				</ul>
 				
-				<div class="Pendientes">
+			</div>
+		
+			<div class="derecha">
+				<a href="../pages/newsprint.html"><img style="float:right;width:50px;height:50px;margin-top:20px;margin-right:20px;" src="../resources/plusicon.png"></a>
+				
+				<div id="pendiente" class="seccion">
+				<p style="color: #E8FF63;font-size:22px;margin-top:5%;margin-left:5%;"><b>Pendiente</b></p>
+				<div class="tarea"><p style="color: #87A69F;font-size:20px;margin-top:5%;margin-left:5%;">Nombre</p><p style="margin-left:5%;margin-right:5%;">blablablapruebapruebaprueblablablablablablablablablabla</p></div>
+				<div class="tarea"><p style="color: #87A69F;font-size:20px;margin-top:5%;margin-left:5%;">Nombre</p><p style="margin-left:5%;margin-right:5%;">blablablapruebapruebaprueblablablablablablablablablabla</p></div>
+				<div class="tarea"><p style="color: #87A69F;font-size:20px;margin-top:5%;margin-left:5%;">Nombre</p><p style="margin-left:5%;margin-right:5%;">blablablapruebapruebaprueblablablablablablablablablabla</p></div>
 				
 				</div>
 				
-				<div class="EnCurso">
+				<div id="encurso" class="seccion">
+				<p style="color: #E8FF63;font-size:22px;margin-top:5%;margin-left:5%;"><b>En Curso</b></p>
+				<div class="tarea"><p style="color: #87A69F;font-size:20px;margin-top:5%;margin-left:5%;">Nombre</p><p style="margin-left:5%;margin-right:5%;">blablablapruebapruebaprueblablablablablablablablablabla</p></div>
+				
 				
 				</div>
 				
-				<div class="Terminado">
+				<div id="terminado" class="seccion">
+				<p style="color: #E8FF63;font-size:22px;margin-top:5%;margin-left:5%;"><b>Terminado</b></p>
+				<div class="tarea"><p style="color: #87A69F;font-size:20px;margin-top:5%;margin-left:5%;">Nombre</p><p style="margin-left:5%;margin-right:5%;">blablablapruebapruebaprueblablablablablablablablablabla</p></div>
+				<div class="tarea"><p style="color: #87A69F;font-size:20px;margin-top:5%;margin-left:5%;">Nombre</p><p style="margin-left:5%;margin-right:5%;">blablablapruebapruebaprueblablablablablablablablablabla</p></div>
+				
 				
 				</div>
 				
-				<div class="Colaboracion">
+				<div id="colaboracion" class="seccion">
+				<p style="color: #E8FF63;font-size:22px;margin-top:5%;margin-left:5%;"><b>Colaboración</b></p>
+				<div class="tarea"><p style="color: #87A69F;font-size:20px;margin-top:5%;margin-left:5%;">Nombre</p><p style="margin-left:5%;margin-right:5%;">blablablapruebapruebaprueblablablablablablablablablabla</p></div>
+				
 				
 				</div>
-			
+				
 			</div>
 			
-		</div>
+		
     </body>
 </html>

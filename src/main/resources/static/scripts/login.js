@@ -4,6 +4,7 @@ function login(){
 
     $.ajax({
         timeout: 3000,
+        async: false,
         type: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
         url: "/login/user/", // A valid URL
         headers: {"X-HTTP-Method-Override": "POST", "Content-Type": "application/json"},

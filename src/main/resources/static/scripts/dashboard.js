@@ -60,7 +60,7 @@ $(document).ready(function(){
                         color = "#FFEB3B";
                     }
                     $("#recuadro_boards").append("<div class='board' onclick='goToBoard(this)' id='board" + i + "'> <div><div class='circle' style='background: " + color + ";'></div><div class='inline'><h1>" + boards[i].nombre + "</h1><p>" + boards[i].descripcion + "</p></div></div></div>");
-                    $("#menuside").append("<li class='sidemenu' onclick='goToBoard()'><a class='menuizq' href ='#'>" + boards[i].nombre + "</a></li>")
+                    $("#menuside").append("<li class='sidemenu' onclick='goToBoard(this)'><a class='menuizq' href ='#'>" + boards[i].nombre + "</a></li>")
                 }
             }
         }

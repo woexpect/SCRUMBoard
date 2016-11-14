@@ -173,4 +173,16 @@ public class InMemoryPersistence{
         }
         return res;
     }
+    
+    public String agregarTarea(String clave, String id, Task task){
+        String res = "Fallo al agregar la Tarea.";
+        try{
+            boards.get(clave).getBackLog().getSprints().get(Integer.parseInt(id)).addTask(task);
+            res = "Tarea agregada satisfactoriamente.";
+        }catch(Exception e){
+            System.out.println("Error --> " + e.getMessage());
+        }
+        return res;
+    }
+    
 }

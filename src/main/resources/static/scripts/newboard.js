@@ -15,6 +15,7 @@ function add(){
 
     if(name != "" && desc != "" && clave != ""){
         $.ajax({
+            async: false,
             timeout: 3000,
             type: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
             url: "/board/create", // A valid URL

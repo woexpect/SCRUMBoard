@@ -2,6 +2,7 @@ package edu.eci.arsw.msgbroker;
 
 import edu.eci.arsw.msgbroker.model.StandardBoard;
 import edu.eci.arsw.msgbroker.model.StandardSprint;
+import edu.eci.arsw.msgbroker.model.StandardTask;
 import edu.eci.arsw.msgbroker.model.interfaces.Board;
 import edu.eci.arsw.msgbroker.services.InMemoryPersistence;
 import java.util.ArrayList;
@@ -104,10 +105,24 @@ public class BoardController {
     @ResponseBody
     public ResponseEntity<?> agregarSprint(@PathVariable String clave, @RequestBody StandardSprint sprint){
         try{
-            System.out.println("------------------Start[[agregarColaborador]]");
-            System.out.println("ENTRA POST --> " + sprint);
+            System.out.println("------------------Start[[agregarSprint]]");
+            System.out.println("ENTRA POST --> " + clave);
             String creado = imp.agregarSprint(clave, sprint);
-            System.out.println("------------------End[[agregarColaborador]]");
+            System.out.println("------------------End[[agregarSprint]]");
+            return new ResponseEntity<>(creado,HttpStatus.CREATED);                
+        }catch(Exception e){
+            return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
+        }
+    }
+    
+    @RequestMapping(path = "/task/{clave}/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> agregarTarea(@PathVariable String clave, @PathVariable String id, @RequestBody StandardTask task){
+        try{
+            System.out.println("------------------Start[[agregarTarea]]");
+            System.out.println("ENTRA POST --> " + clave + " [" + clave + "]");
+            String creado = imp.agregarTarea(clave, id, task);
+            System.out.println("------------------End[[agregarTarea]]");
             return new ResponseEntity<>(creado,HttpStatus.CREATED);                
         }catch(Exception e){
             return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  

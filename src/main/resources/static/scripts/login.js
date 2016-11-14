@@ -15,15 +15,13 @@ function login(){
            mail: c
         })
     }).then(function(data){        
-        sessionData(data);
+        sessionStorage.setItem("user", data.name);
+        sessionStorage.setItem("mail", data.mail);
         alert("Bienvenido, " + data.name);
+        setTimeout(function() {
+            window.location.replace("http://www.rapidtables.com/web/dev/javascript-redirect.htm");
+        }, 1000);
     }).fail(function(response){
         alert("Usted no se ha autenticado correctamente.");
     });
-}
-
-function sessionData(data){
-    sessionStorage.setItem("user", data.name);
-    sessionStorage.setItem("mail", data.mail);
-    window.location = "dashboard.html";
 }

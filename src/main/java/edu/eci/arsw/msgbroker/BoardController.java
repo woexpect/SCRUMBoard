@@ -94,6 +94,7 @@ public class BoardController {
             System.out.println("------------------Start[[agregarColaborador]]");
             System.out.println("ENTRA POST --> " + mail);
             String creado = imp.agregarColaborador(mail, clave);
+            msgt.convertAndSend("/topic/userboard."+mail.substring(0, mail.length()-1), imp.getBoard(clave));
             System.out.println("------------------End[[agregarColaborador]]");
             return new ResponseEntity<>(creado,HttpStatus.CREATED);                
         }catch(Exception e){

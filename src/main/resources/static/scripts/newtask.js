@@ -3,7 +3,6 @@ function addTask(){
     var name = $("#nombre").val();
     var desc = $("#descripcion").val();
     var id = sessionStorage.getItem("sprintTask");
-    alert("/board/task/"+clave+"/"+id);
     
     if(name != "" && desc != "" && clave != ""){
         $.ajax({

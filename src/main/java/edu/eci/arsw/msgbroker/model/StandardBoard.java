@@ -15,6 +15,7 @@ public class StandardBoard implements Board{
     String clave;
     ArrayList<String> colaboradores = new ArrayList<>(); 
     Backlog backlogBoard;
+    String correo;
     
     public StandardBoard(){
     }
@@ -28,6 +29,13 @@ public class StandardBoard implements Board{
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.clave = clave;
+    }
+    
+    public StandardBoard(String nombre, String descripcion, String clave, String correo){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.clave = clave;
+        this.correo = correo;
     }
     
     public void setNombre(String nombre){
@@ -52,6 +60,14 @@ public class StandardBoard implements Board{
     
     public String getClave(){
         return clave;
+    }
+    
+    public void setCorreo(String correo){
+        this.correo = correo;
+    }
+    
+    public String getCorreo(){
+        return correo;
     }
 
     @Override

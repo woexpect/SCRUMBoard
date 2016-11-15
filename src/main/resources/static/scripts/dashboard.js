@@ -1,18 +1,18 @@
 var stompClient = null;
 var mail = null;
 var boards;
+var i;
 
 function connect() {
     var socket = new SockJS('/stompendpoint');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
-
-        //alert(mail);
-        //stompClient.subscribe('/topic/userlogin/{'+mail+'}', function (data) {
-        stompClient.subscribe('/topic/userboard/{sebasp95@hotmail.com}', function (data) {    
+        stompClient.subscribe('/topic/userboard.'+mail, function (data) {
             var objetoJson = JSON.parse(data.body);
-            console.log(objetoJson);
+            var color = "#FF1744";
+            $("#recuadro_boards").append("<div class='board' onclick='goToBoard(this)' id='board" + i + "'> <div><div class='circle' style='background: " + color + ";'></div><div class='inline'><h1>" + objetoJson.nombre + "</h1><p>" + objetoJson.descripcion + "</p></div></div></div>");
+            $("#menuside").append("<li class='sidemenu' onclick='goToBoard(this)'><a class='menuizq' href ='#'>" + objetoJson.nombre + "</a></li>")
         });
     });
 }

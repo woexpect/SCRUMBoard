@@ -39,6 +39,5 @@ function logout(){
 function goToSprint(elem){
     var id = elem.id;
     sessionStorage.setItem("sprintTask",id.substring(id.length-1, id.length));
-    alert(sessionStorage.getItem("sprintTask"));
     window.location = "task.html";   
 }

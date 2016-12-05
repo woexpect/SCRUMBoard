@@ -13,16 +13,23 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
-
+    
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic");
+        
+        config.enableStompBrokerRelay("/topic/").setRelayHost("black-boar.rmq.cloudamqp.com").setRelayPort(61613).
+                setClientLogin("kpbdtdlb").
+                setClientPasscode("kPzV9zglJZfIM87s0bzzwaXQbvJM0HhD").
+                setSystemLogin("kpbdtdlb").
+                setSystemPasscode("kPzV9zglJZfIM87s0bzzwaXQbvJM0HhD").
+                setVirtualHost("kpbdtdlb");
+                
         config.setApplicationDestinationPrefixes("/app");
-    }
-
+    }    
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/stompendpoint").withSockJS();
+        registry.addEndpoint("/stompendpoint").setAllowedOrigins("*").withSockJS();
+
     }
 
 }

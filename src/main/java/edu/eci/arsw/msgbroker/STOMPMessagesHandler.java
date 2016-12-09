@@ -8,6 +8,7 @@ package edu.eci.arsw.msgbroker;
 import edu.eci.arsw.msgbroker.model.StandardBoard;
 import edu.eci.arsw.msgbroker.model.interfaces.Board;
 import edu.eci.arsw.msgbroker.services.InMemoryPersistence;
+import edu.eci.arsw.msgbroker.services.REDISPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -26,7 +27,7 @@ public class STOMPMessagesHandler {
     SimpMessagingTemplate msgt;
     
     @Autowired
-    InMemoryPersistence imp;
+    REDISPersistence imp;
     
     @MessageMapping("/board/notify")
     public void notify(Board board){

@@ -15,5 +15,9 @@ public interface Task {
     
     public void addUser(User user);
     public ArrayList<User> getUsers();
+    public String getNombre();
+    public String getDescripcion();
+    public String getStatus();
+    
     
 }

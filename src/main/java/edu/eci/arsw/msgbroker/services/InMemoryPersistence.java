@@ -22,8 +22,8 @@ import org.springframework.stereotype.Service;
  * elementos necesarios para la ejecución de la aplicación.
  * @author johan peña
  */
-@Service
-public class InMemoryPersistence{
+
+public class InMemoryPersistence implements Persistence{
     
      ConcurrentHashMap<String, User> users;
      ConcurrentHashMap<String, Board> boards;
@@ -36,7 +36,7 @@ public class InMemoryPersistence{
         preloadBoards();
     }
 
-    private void preloadUsers() {
+    public void preloadUsers() {
         User a = new User("johan penia", "asd123", "woexpect", "sebasp95@hotmail.com");
         User b = new User("georgios ikosidekas", "qwe123", "giko", "gikosidekas@hotmail.com");
         User c = new User("alejandro ramirez", "12345", "amirez", "alejormrz@hotmail.com");
@@ -81,7 +81,7 @@ public class InMemoryPersistence{
     
     //====================================================================================================================================================
     
-    private void preloadBoards() {
+    public void preloadBoards() {
         Board a = new StandardBoard("PROYECTO ARSW", "Este board contiene la información sobre el proyecto de arsw.","ARSQ20165");
         Board b = new StandardBoard("PROYECTO PSIS", "Este board contiene la información sobre el proyecto de PSIS.","PSIS30");
         Board c = new StandardBoard("PROYECTO COSW", "Este board contiene la información sobre el proyecto de COSW.","COSW24");

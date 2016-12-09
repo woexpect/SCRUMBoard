@@ -2,6 +2,7 @@ package edu.eci.arsw.msgbroker;
 
 import edu.eci.arsw.msgbroker.model.interfaces.User;
 import edu.eci.arsw.msgbroker.services.InMemoryPersistence;
+import edu.eci.arsw.msgbroker.services.REDISPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     
     @Autowired
-    InMemoryPersistence imp;
+    REDISPersistence imp;
 
     @RequestMapping(path = "/user/{mail}",method = RequestMethod.GET)
     public ResponseEntity<?> test(@PathVariable String mail){

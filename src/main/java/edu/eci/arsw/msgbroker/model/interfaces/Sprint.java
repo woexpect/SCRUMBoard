@@ -16,4 +16,7 @@ public interface Sprint {
     public void addTask(Task task);
     public ArrayList<Task> getTasks();
     public String calcularHoras(); 
+    public String getNombre();
+    public String getDescripcion();
+    public String getStatus();
 }

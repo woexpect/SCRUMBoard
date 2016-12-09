@@ -16,7 +16,10 @@ public interface Board {
     public void addCollaborator(String mail);
     public ArrayList<String> getCollaborators();
     public void addBackLog(Backlog backlog);
+    public String getNombre();
+    public String getDescripcion();
     public String getClave();
     public Backlog getBackLog();
     public void crearBacklog(String clave);
+    
 }

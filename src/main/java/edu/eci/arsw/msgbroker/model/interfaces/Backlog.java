@@ -15,5 +15,7 @@ public interface Backlog {
     
     public void addSprint(Sprint sprint);
     public ArrayList<Sprint> getSprints();
+    public String getNombre();
+    public String getDescripcion();
     
 }

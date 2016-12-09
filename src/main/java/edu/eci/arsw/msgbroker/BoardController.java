@@ -5,6 +5,7 @@ import edu.eci.arsw.msgbroker.model.StandardSprint;
 import edu.eci.arsw.msgbroker.model.StandardTask;
 import edu.eci.arsw.msgbroker.model.interfaces.Board;
 import edu.eci.arsw.msgbroker.services.InMemoryPersistence;
+import edu.eci.arsw.msgbroker.services.REDISPersistence;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardController {
     
     @Autowired
-    InMemoryPersistence imp;
+    REDISPersistence imp;
     
     @Autowired
     SimpMessagingTemplate msgt;    
@@ -72,6 +73,7 @@ public class BoardController {
         try{
             System.out.println("------------------Start[[createBoard]]");
             System.out.println("ENTRA POST --> " + board);
+            System.out.println("col:"+board.getCollaborators().size());
             String creado = imp.crearBoard(board);
             System.out.println("Board: " + creado);
             System.out.println("------------------End[[createBoard]]");

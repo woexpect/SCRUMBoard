@@ -25,29 +25,69 @@ function disconnect() {
     console.log("Disconnected");
 }
 
+cargaBoards = function () {
+    var promesaBoardsDisponibles = $.getJSON("/board/userboard/"+mail);   
+    
+    promesaBoardsDisponibles.done(function(data, status) {
+        var color;
+        console.log(data);
+        boards = data;
+        for(i = 0; i < boards.length; i++){
+            for(j = 0; j < boards[i].collaborators.length; j++){
+                var yyy = boards[i].collaborators[j].substring(0,boards[i].collaborators[j].length-1);
+
+                if(mail === yyy){
+
+ 
+                    if(boards[i].collaborators[j].substring(boards[i].collaborators[j].length-1,boards[i].collaborators[j].length) === "1"){
+                        color = "#03A9F4";
+                    }else if(boards[i].collaborators[j].substring(boards[i].collaborators[j].length-1,boards[i].collaborators[j].length) === "2"){
+                        color = "#4CAF50";
+                    }else if(boards[i].collaborators[j].substring(boards[i].collaborators[j].length-1,boards[i].collaborators[j].length) === "3"){
+                        color = "#FFEB3B";
+                    }
+                    $("#recuadro_boards").append("<div class='board' onclick='goToBoard(this)' id='board" + i + "'> <div><div class='circle' style='background: " + color + ";'></div><div class='inline'><h1>" + boards[i].nombre + "</h1><p>" + boards[i].descripcion + "</p></div></div></div>");
+                    $("#menuside").append("<li class='sidemenu' onclick='goToBoard(this)'><a class='menuizq' href ='#'>" + boards[i].nombre + "</a></li>")
+                }
+            }
+        }
+      
+    });     
+};
+
 
 $(document).ready(function(){
     var username = sessionStorage.getItem("user");
     mail = sessionStorage.getItem("mail");
     $("#username").text(username);
     connect();
-
+    cargaBoards();
+    /*
     function cargarBoards(){
         return new Promise(function(done, reject){
             setTimeout(function (){
-                done()
-            }, 500)
-        })
+                done();
+            }, 500);
+        });
     }
+    
     cargarBoards()
     .then(function (){
-        $.get("/board/userboard/"+mail, function(data, status){
+        $.when($.get("/board/userboard/"+mail)).done(function (data, status){
+            boards = data;
+        }).fail(function() {
+        // will be called if one (or both) requests fail.  If a request does fail,
+        // the `done` callback will *not* be called even if one request succeeds.
+        }); 
+        
+        /*$.get("/board/userboard/"+mail, function(data, status){
+            timeout: 8000;
             boards = data;
         });
         return cargarBoards();
     })
     .then(function (){
-        timeout: 3000;
+
         var color;
         for(i = 0; i < boards.length; i++){
             for(j = 0; j < boards[i].collaborators.length; j++){
@@ -68,6 +108,7 @@ $(document).ready(function(){
     .catch(function(err){
         alert("ERROR ---> " + err);
     });
+    */
 });
 
 function logout(){

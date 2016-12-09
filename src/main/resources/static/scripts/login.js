@@ -19,7 +19,8 @@ function login(){
         sessionStorage.setItem("mail", data.mail);
         alert("Bienvenido, " + data.name);
         setTimeout(function() {
-            window.location.replace("http://www.rapidtables.com/web/dev/javascript-redirect.htm");
+            //$(location).attr('href',"dashboard.html"); 
+            window.location.href = "dashboard.html";
         }, 1000);
     }).fail(function(response){
         alert("Usted no se ha autenticado correctamente.");

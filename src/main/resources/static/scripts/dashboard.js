@@ -12,7 +12,7 @@ function connect() {
             var objetoJson = JSON.parse(data.body);
             var color = "#FF1744";
             $("#recuadro_boards").append("<div class='board' onclick='goToBoard(this)' id='board" + i + "'> <div><div class='circle' style='background: " + color + ";'></div><div class='inline'><h1>" + objetoJson.nombre + "</h1><p>" + objetoJson.descripcion + "</p></div></div></div>");
-            $("#menuside").append("<li class='sidemenu' onclick='goToBoard(this)'><a class='menuizq' href ='#'>" + objetoJson.nombre + "</a></li>")
+            $("#menuside").append("<li class='sidemenu' onclick='goToBoard(this)'><a class='menuizq' href ='#'>" + objetoJson.nombre + "</a></li>");
         });
     });
 }
@@ -47,7 +47,7 @@ cargaBoards = function () {
                         color = "#FFEB3B";
                     }
                     $("#recuadro_boards").append("<div class='board' onclick='goToBoard(this)' id='board" + i + "'> <div><div class='circle' style='background: " + color + ";'></div><div class='inline'><h1>" + boards[i].nombre + "</h1><p>" + boards[i].descripcion + "</p></div></div></div>");
-                    $("#menuside").append("<li class='sidemenu' onclick='goToBoard(this)'><a class='menuizq' href ='#'>" + boards[i].nombre + "</a></li>")
+                    $("#menuside").append("<li class='sidemenu' onclick='goToBoard(this)'><a class='menuizq' href ='#'>" + boards[i].nombre + "</a></li>");
                 }
             }
         }

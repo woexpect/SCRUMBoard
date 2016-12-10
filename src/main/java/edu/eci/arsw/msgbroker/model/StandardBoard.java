@@ -89,6 +89,12 @@ public class StandardBoard implements Board{
     public Backlog getBackLog() {
         return backlogBoard;
     }
+
+    public void setColaboradores(ArrayList<String> colaboradores) {
+        this.colaboradores = colaboradores;
+    }
+    
+    
     
     @Override
     public String toString() {

@@ -31,7 +31,7 @@ public final class REDISPersistence implements Persistence{
     
     ConcurrentHashMap<String, User> users;
     ConcurrentHashMap<String, Board> boards;
-    Jedis jedis;
+    //Jedis jedis;
     
     public REDISPersistence(){
         users = new ConcurrentHashMap<>();
@@ -125,7 +125,7 @@ public final class REDISPersistence implements Persistence{
 
     @Override
     public Board getBoard(String clave) {
-        jedis = JedisUtil.getPool().getResource();
+        Jedis jedis = JedisUtil.getPool().getResource();
         Map<String, String> properties = jedis.hgetAll("board:" + clave);
         StandardBoard board = new StandardBoard(properties.get("boardName"), properties.get("boardDescription"), properties.get("pass"));      
         
@@ -136,9 +136,9 @@ public final class REDISPersistence implements Persistence{
             board.addCollaborator(col);
         }
         
-        board.addBackLog(getBacklog(clave));
+        board.addBackLog(getBacklog(clave, jedis));
         
-        ArrayList<Sprint> sprints = getSprints(properties.get("boardName"), clave);
+        ArrayList<Sprint> sprints = getSprints(properties.get("boardName"), clave, jedis);
         
         for(int i=0; i<sprints.size(); i++){
             board.getBackLog().addSprint(sprints.get(i));
@@ -149,17 +149,17 @@ public final class REDISPersistence implements Persistence{
         return board;
     }
     
-    private Backlog getBacklog(String clave){
+    private Backlog getBacklog(String clave, Jedis jedis){
         Map<String, String> backlogProperties = jedis.hgetAll("backlog:" + clave);
         return new StandardBackLog(backlogProperties.get("backlogName"), backlogProperties.get("backlogDescription"));
     }
     
-    private ArrayList<Sprint> getSprints(String nombreBoard, String clave){
+    private ArrayList<Sprint> getSprints(String nombreBoard, String clave, Jedis jedis){
         ArrayList<Sprint> sprints = new ArrayList<>();
         for(int i=0; i<jedis.llen("sprints_" + clave); i++){
             Map<String, String> sprintProperties = jedis.hgetAll("sprint:" + clave + "_" + jedis.lindex("sprints_" + clave, i));
             StandardSprint sp = new StandardSprint(sprintProperties.get("sprintName"), sprintProperties.get("sprintDescription"), sprintProperties.get("sprintStatus"));
-            ArrayList<Task> tasks = getTasks(nombreBoard, clave, sprintProperties.get("sprintName"));
+            ArrayList<Task> tasks = getTasks(nombreBoard, clave, sprintProperties.get("sprintName"), jedis);
             
             for (Task task : tasks) {
                 sp.addTask(tasks.get(i));
@@ -169,7 +169,7 @@ public final class REDISPersistence implements Persistence{
         return sprints;
     }
     
-    private ArrayList<Task> getTasks(String nombreBoard, String clave, String nombreSprint){
+    private ArrayList<Task> getTasks(String nombreBoard, String clave, String nombreSprint, Jedis jedis){
         ArrayList<Task> tasks = new ArrayList<>();
         for(int i=0; i<jedis.llen(clave + "_" + nombreSprint + "_Tasks"); i++){
             Map<String, String> taskProperties = jedis.hgetAll("task:" + clave 
@@ -238,13 +238,16 @@ public final class REDISPersistence implements Persistence{
     @Override
     public String agregarColaborador(String mail, String clave) {
         String res = "";
-        ArrayList a = boards.get(clave).getCollaborators();
+        
+        ArrayList a = getBoard(clave).getCollaborators();
         if(a.contains(mail)){
             res = "El colaborador descrito ya está agregado en el board.";
         }else{
             res = "Colaborador agregado satisfactoriamente.";
-            users.get(mail).addClaveBoard(clave);
-            boards.get(clave).addCollaborator(mail);    
+            //users.get(mail).addClaveBoard(clave);
+            //boards.get(clave).addCollaborator(mail);
+            
+            System.out.println("entro a agregarColaborador");
             Jedis jedis = JedisUtil.getPool().getResource();
             jedis.lpush("collaborators_" + clave, mail);
             jedis.lpush("claves_" + mail, clave);
@@ -277,13 +280,11 @@ public final class REDISPersistence implements Persistence{
     @Override
     public String crearBoard(Board board) {
         String res = "";
-        Board b = boards.get(board.getClave());
-        if(b != null){
-            res = "El board con la clave: " + board.getClave() + " ya existe, por favor ingrese otra clave.";
-        }else{
+        
+        Board b = getBoard(board.getClave());
+        if(b.getClave() != board.getClave()){
             res = "Se ha registrado el board correctamente.";
-            boards.put(board.getClave(), board);
-            boards.get(board.getClave()).crearBacklog(board.getClave());
+
             Map<String, String> boardProperties = new HashMap<String, String>();
             boardProperties.put("boardName", board.getNombre());
             boardProperties.put("boardDescription", board.getDescripcion());
@@ -291,8 +292,11 @@ public final class REDISPersistence implements Persistence{
             Jedis jedis = JedisUtil.getPool().getResource();
             jedis.hmset("board:" + board.getClave(), boardProperties);
             System.out.println("colaboradores:"+board.getCollaborators().size());
+            System.out.println("clave board:" + board.getClave());
             for(int i=0; i< board.getCollaborators().size(); i++){
                 jedis.lpush("collaborators_" + board.getClave(), board.getCollaborators().get(i));
+                String col = board.getCollaborators().get(i).substring(0, board.getCollaborators().get(i).length()-1);
+                jedis.lpush("claves_" + col, board.getClave());
             }
             Map<String, String> backlogProperties = new HashMap<String, String>();
             backlogProperties.put("backlogName", board.getBackLog().getNombre());
@@ -300,6 +304,8 @@ public final class REDISPersistence implements Persistence{
             jedis.hmset("backlog:" + board.getClave(), backlogProperties);
             
             jedis.close();
+        }else{
+            res = "El board con la clave: " + board.getClave() + " ya existe, por favor ingrese otra clave.";
         }
         return res;
     }

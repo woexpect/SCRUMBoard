@@ -25,6 +25,7 @@ function add(){
         
             chainedPromises = function(){
                 postRequest();
+                
             };
             postRequest = function() {
                 return $.ajax({
@@ -32,6 +33,9 @@ function add(){
                     type: 'POST',
                     data: jsonBoard,
                     contentType: "application/json"
+                }).done(function(data){
+                    alert(data);
+                    window.location.href = "sprintView.html";
                 });
             };
     

@@ -114,21 +114,21 @@ public class BoardController {
             System.out.println("------------------End[[agregarSprint]]");
             return new ResponseEntity<>(creado,HttpStatus.CREATED);                
         }catch(Exception e){
-            return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
+            return new ResponseEntity<>("Error al agregar nuevo sprint.",HttpStatus.FORBIDDEN);  
         }
     }
     
-    @RequestMapping(path = "/task/{clave}/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "/task/{clave}/{sprintName}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> agregarTarea(@PathVariable String clave, @PathVariable String id, @RequestBody StandardTask task){
+    public ResponseEntity<?> agregarTarea(@PathVariable String clave, @PathVariable String sprintName, @RequestBody StandardTask task){
         try{
             System.out.println("------------------Start[[agregarTarea]]");
             System.out.println("ENTRA POST --> " + clave + " [" + clave + "]");
-            String creado = imp.agregarTarea(clave, id, task);
+            String creado = imp.agregarTarea(clave, sprintName, task);
             System.out.println("------------------End[[agregarTarea]]");
             return new ResponseEntity<>(creado,HttpStatus.CREATED);                
         }catch(Exception e){
-            return new ResponseEntity<>("Error al agregar Usuario.",HttpStatus.FORBIDDEN);  
+            return new ResponseEntity<>("Error al agregar la tarea.",HttpStatus.FORBIDDEN);  
         }
     }
     

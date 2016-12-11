@@ -162,7 +162,7 @@ public final class REDISPersistence implements Persistence{
             ArrayList<Task> tasks = getTasks(nombreBoard, clave, sprintProperties.get("sprintName"), jedis);
             
             for (Task task : tasks) {
-                sp.addTask(tasks.get(i));
+                sp.addTask(task);
             }
             sprints.add(sp);
         }
@@ -207,9 +207,8 @@ public final class REDISPersistence implements Persistence{
         sprintProperties.put("endDate", "");
         Jedis jedis = JedisUtil.getPool().getResource();
         jedis.hmset("sprint:" + clave + "_" + nombre, sprintProperties);
+        jedis.lpush("sprints_" + clave , nombre);
         jedis.close();
-                Sprint s = new StandardSprint(nombre, descripcion, status);
-        boards.get(clave).getBackLog().addSprint(s);
     }
 
     @Override
@@ -223,8 +222,6 @@ public final class REDISPersistence implements Persistence{
         Jedis jedis = JedisUtil.getPool().getResource();
         jedis.hmset("task:" + clave + "_" + Integer.toString(sp) + "_" + nombre, taskProperties);
         jedis.close();    
-        Task t = new StandardTask(nombre, descripcion, status);
-        boards.get(clave).getBackLog().getSprints().get(sp).addTask(t);
     }
 
     @Override
@@ -313,42 +310,38 @@ public final class REDISPersistence implements Persistence{
     @Override
     public String agregarSprint(String clave, Sprint sprint) {
         String res = "Fallo al agregar el Sprint.";
-        try{
-            boards.get(clave).getBackLog().addSprint(sprint);
-            Map<String, String> sprintProperties = new HashMap<String, String>();
-            sprintProperties.put("sprintName", sprint.getNombre());
-            sprintProperties.put("sprintDescription", sprint.getDescripcion());
-            sprintProperties.put("sprintStatus", sprint.getStatus());
-            sprintProperties.put("initDate", "");
-            sprintProperties.put("endDate", "");
-            Jedis jedis = JedisUtil.getPool().getResource();
-            jedis.hmset("sprint:" + clave + "_" + sprint.getNombre(), sprintProperties);
-            jedis.close();
-            res = "Sprint agregado satisfactoriamente.";
-        }catch(Exception e){
-            System.out.println("Error --> " + e.getMessage());
-        }
+        
+      
+        Map<String, String> sprintProperties = new HashMap<String, String>();
+        sprintProperties.put("sprintName", sprint.getNombre());
+        sprintProperties.put("sprintDescription", sprint.getDescripcion());
+        sprintProperties.put("sprintStatus", sprint.getStatus());
+        sprintProperties.put("initDate", "");
+        sprintProperties.put("endDate", "");
+        Jedis jedis = JedisUtil.getPool().getResource();
+        jedis.hmset("sprint:" + clave + "_" + sprint.getNombre(), sprintProperties);
+        jedis.lpush("sprints_" + clave , sprint.getNombre());
+        jedis.close();
+        res = "Sprint agregado satisfactoriamente.";
+        System.out.println(res+sprint.getNombre());
         return res;
     }
 
     @Override
-    public String agregarTarea(String clave, String id, Task task) {
-        String res = "Fallo al agregar la Tarea.";
-        try{
-            boards.get(clave).getBackLog().getSprints().get(Integer.parseInt(id)).addTask(task);
-            Map<String, String> taskProperties = new HashMap<String, String>();
-            taskProperties.put("taskName", task.getNombre());
-            taskProperties.put("taskDescription", task.getDescripcion());
-            taskProperties.put("taskStatus", task.getStatus());
-            taskProperties.put("initDate", "");
-            taskProperties.put("endDate", "");
-            Jedis jedis = JedisUtil.getPool().getResource();
-            jedis.hmset("task:" + clave + "_" + id + "_" + task.getNombre(), taskProperties);
-            jedis.close();  
-            res = "Tarea agregada satisfactoriamente.";
-        }catch(Exception e){
-            System.out.println("Error --> " + e.getMessage());
-        }
+    public String agregarTarea(String clave, String sprintName, Task task) {
+            
+        Map<String, String> taskProperties = new HashMap<String, String>();
+        taskProperties.put("taskName", task.getNombre());
+        taskProperties.put("taskDescription", task.getDescripcion());
+        taskProperties.put("taskStatus", task.getStatus());
+        taskProperties.put("initDate", "");
+        taskProperties.put("endDate", "");
+        Jedis jedis = JedisUtil.getPool().getResource();
+        jedis.hmset("task:" + clave + "_" + sprintName + "_" + task.getNombre(), taskProperties);
+        jedis.lpush(clave + "_" + sprintName + "_Tasks", task.getNombre());
+        jedis.close();  
+        String res = "Tarea agregada satisfactoriamente.";
+      
         return res;
     }
     

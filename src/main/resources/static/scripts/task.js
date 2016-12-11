@@ -38,6 +38,7 @@ cargaTareas = function () {
 
         boards = data;
         console.log(boards);
+        console.log(obj2);
         $("#sprintname").text(boards[obj].backLog.sprints[obj2].nombre);
         sessionStorage.setItem("claveboard", boards[obj].clave);
         for(i = 0; i < boards[obj].backLog.sprints[obj2].tasks.length; i++){

@@ -73,7 +73,13 @@ public class BoardController {
         try{
             System.out.println("------------------Start[[createBoard]]");
             System.out.println("ENTRA POST --> " + board);
+            
+        
             System.out.println("col:"+board.getCollaborators().size());
+            for(int i=0; i< board.getCollaborators().size(); i++){
+                msgt.convertAndSend("/topic/userboard."+board.getCollaborators().get(i).substring(0, board.getCollaborators().get(i).length()-1), 
+                        board);
+            }
             String creado = imp.crearBoard(board);
             System.out.println("Board: " + creado);
             System.out.println("------------------End[[createBoard]]");

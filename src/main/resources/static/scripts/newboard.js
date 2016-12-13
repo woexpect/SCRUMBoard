@@ -19,7 +19,7 @@ function add(){
     
     var jsonBoard = JSON.stringify(board);
     console.log(jsonBoard);
-   
+
     if(name !== "" && desc !== "" && clv !== ""){
         
             chainedPromises = function(){

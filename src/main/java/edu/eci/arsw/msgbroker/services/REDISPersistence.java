@@ -29,19 +29,15 @@ import redis.clients.jedis.Jedis;
 @Service
 public final class REDISPersistence implements Persistence{
     
-    ConcurrentHashMap<String, User> users;
-    ConcurrentHashMap<String, Board> boards;
-    //Jedis jedis;
+
     
     public REDISPersistence(){
-        users = new ConcurrentHashMap<>();
-        boards = new ConcurrentHashMap<>();
-        //preloadUsers();
-        //preloadBoards();
+
     }
 
     @Override
     public void preloadUsers() {
+        /*
         User a = getUser("sebasp95@hotmail.com");
         User b = getUser("gikosidekas@hotmail.com");
         User c = getUser("alejormrz@hotmail.com");
@@ -51,7 +47,7 @@ public final class REDISPersistence implements Persistence{
         users.put(c.getMail(), c);
         users.get("sebasp95@hotmail.com").addClaveBoard("ARSQ20165");
         users.get("sebasp95@hotmail.com").addClaveBoard("PSIS30");
-        users.get("alejormrz@hotmail.com").addClaveBoard("COSW24");
+        users.get("alejormrz@hotmail.com").addClaveBoard("COSW24");*/
     
     }
 
@@ -67,7 +63,6 @@ public final class REDISPersistence implements Persistence{
     @Override
     public User login(String mail, String pwd) {
         User res = getUser(mail);
-
         if(res != null){
             if(res.getPwd().equals(pwd)){
                 return res;
@@ -81,16 +76,15 @@ public final class REDISPersistence implements Persistence{
     @Override
     public String register(User user) {
         String res = "";
-        User u = null;
-        u = users.get(user.getMail());
-        if(u != null){
+        
+        User u  = getUser(user.getMail());
+        if(u.getMail() != null){
             res = "El usuario con el correo descrito ya existe.";
         }else{
-            users.put(user.getMail(), user);
             Map<String, String> userProperties = new HashMap<String, String>();
             userProperties.put("name", user.getName());
-            userProperties.put("pass", user.getPwd());
-            userProperties.put("user", user.getUserName());
+            userProperties.put("pwd", user.getPwd());
+            userProperties.put("uname", user.getUserName());
             userProperties.put("email", user.getMail());
             
             Jedis jedis = JedisUtil.getPool().getResource();
@@ -104,7 +98,7 @@ public final class REDISPersistence implements Persistence{
 
     @Override
     public void preloadBoards() {
-        
+        /*
         Board a = getBoard("ARSQ20165");
         Board b = getBoard("PSIS30");
         Board c = getBoard("COSW24");
@@ -120,7 +114,7 @@ public final class REDISPersistence implements Persistence{
         addTask("Task 1 ARSW", "Tarea 1 para el Sprint 1 ARSW", "En Curso" ,"ARSQ20165", 0);
         addTask("Task 2 ARSW", "Tarea 2 para el Sprint 1 ARSW", "En Curso" ,"ARSQ20165", 0);
         addTask("Task 1 ARSW", "Tarea 1 para el Sprint 2 ARSW", "Terminado" ,"ARSQ20165", 1);        
-
+        */
     }
 
     @Override
@@ -193,7 +187,6 @@ public final class REDISPersistence implements Persistence{
         jedis.close();
         
         Backlog b = new StandardBackLog(nombre, descripcion);
-        boards.get(clave).addBackLog(b);
 
     }
 
@@ -226,7 +219,7 @@ public final class REDISPersistence implements Persistence{
 
     @Override
     public void addColaborador(String mail, String clave) {
-        boards.get(clave).addCollaborator(mail);
+
         Jedis jedis = JedisUtil.getPool().getResource();
         jedis.lpush("collaborators_" + clave, mail);
         jedis.close();

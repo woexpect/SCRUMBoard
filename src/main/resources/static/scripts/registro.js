@@ -6,9 +6,10 @@ function registro() {
     var nombre = $("#nombre").val().concat(" " + $("#apellido").val());
     
     if(usuario !== "" && email !== "" && contra !== "" && contraConfirmacion !== "" && nombre !== ""){
+        console.log(usuario);
         if(contra === contraConfirmacion) { 
             $.ajax({
-                async: false,
+                //async: false,
                 type: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
                 url: "/register/user", // A valid URL
                 headers: {"X-HTTP-Method-Override": "POST", "Content-Type": "application/json"},
@@ -21,6 +22,7 @@ function registro() {
             }).then(function(data){
                 alert(data);
             }).fail(function(response){
+                console.log(response);
                 alert("No se ha podido registrar su información, por favor, verifiquela. Err: " + response);
             });
         }

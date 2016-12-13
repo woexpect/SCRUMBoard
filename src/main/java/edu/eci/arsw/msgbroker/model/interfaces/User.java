@@ -75,6 +75,10 @@ public class User {
         return claves;
     }
     
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
+    
     @Override
     public String toString() {
         return "User{" + "name=" + name + "pwd=" + pwd + "uname=" + uname + "mail=" + mail + "}";
